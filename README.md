@@ -1,6 +1,6 @@
 # Recognition and Localization of Semantic Co-speech Gestures
 
-This code is for our paper titled: **Recognizing Co-speech Gestures in-the-Wild** (ECCV 2026)br />
+This code is for our paper titled: **Recognizing Co-speech Gestures in-the-Wild** (ECCV 2026) <br>
 **Authors**: [Sindhu Hegde](https://sindhu-hegde.github.io), [K R Prajwal](https://www.robots.ox.ac.uk/~prajwal/), [Andrew Zisserman](https://scholar.google.com/citations?hl=en&user=UZ5wscMAAAAJ) 
 
 |   📝 Paper   |   📑 Project Page    |  📦 GRW Dataset |
