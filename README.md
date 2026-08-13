@@ -1,67 +1,80 @@
+<h1 align="center">Recognition and Localization of Semantic Co-speech Gestures</h1>
 
-# Recognition and Localization of Semantic Co-speech Gestures
-
-  
-
-This code is for our paper titled: **Recognizing Co-speech Gestures in-the-Wild** (ECCV 2026) <br>
-
-**Authors**: [Sindhu Hegde](https://sindhu-hegde.github.io), [K R Prajwal](https://www.robots.ox.ac.uk/~prajwal/), [Andrew Zisserman](https://scholar.google.com/citations?hl=en&user=UZ5wscMAAAAJ) 
-
-  
-
-| 📝 Paper | 📑 Project Page | 📦 GRW Dataset |
-
-|:-----------:|:-------------------:|:------------------:|
-
-| [Paper](https://arxiv.org/abs/2605.31589) | [Website](https://www.robots.ox.ac.uk/~vgg/research/grw/) | [Dataset](https://www.robots.ox.ac.uk/~vgg/research/grw/datset) |
-<br />
-
-<p  align="center">
-  <img  src="assets/teaser.gif",  width="600"/>
+<p align="center">
+  This code is for our paper titled: <b>Recognizing Co-speech Gestures in-the-Wild</b>
 </p>
 
-  
+<p align="center">
+  <b>ECCV 2026</b>
+</p>
+
+<p align="center">
+  <a href="https://sindhu-hegde.github.io">Sindhu Hegde</a>
+  &nbsp;·&nbsp;
+  <a href="https://www.robots.ox.ac.uk/~prajwal/">K R Prajwal</a>
+  &nbsp;·&nbsp;
+  <a href="https://scholar.google.com/citations?hl=en&user=UZ5wscMAAAAJ">Andrew Zisserman</a>
+</p>
+
+<p align="center">
+  <a href="https://arxiv.org/abs/2605.31589"><img src="https://img.shields.io/badge/arXiv-2605.31589-b31b1b.svg" alt="arXiv"></a>
+  <a href="https://www.robots.ox.ac.uk/~vgg/research/grw/"><img src="https://img.shields.io/badge/Project-Page-blue.svg" alt="Project Page"></a>
+  <a href="https://www.robots.ox.ac.uk/~vgg/research/grw/dataset"><img src="https://img.shields.io/badge/Dataset-GRW-green.svg" alt="GRW Dataset"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-yellow.svg" alt="License: Apache 2.0"></a>
+  <img src="https://img.shields.io/badge/python-3.10-blue.svg" alt="Python 3.10">
+</p>
+
+<p align="center">
+  <img src="assets/teaser.gif" width="600" alt="Semantic co-speech gestures recognized and localized in real-world videos"/>
+</p>
+
 Our aim is to recognise and localize **semantic gestures** in real-world videos. These gestures are visually depictive and semantically linked to specific spoken words. We introduce a new large-scale benchmark, **GRW** (Gesture Recognition in-the-Wild), which provides word-level annotations and gesture boundaries for semantic gestures occurring in unconstrained real-world settings.
-  
 
-## News 🚀🚀🚀
+---
 
- - **[2026.08.13]** 🔥 **Inference code** released - It is now possible to results for the two tasks: (i) semantic gesture classification, and (ii) word recognition and localization, for any real-world video
+## 🚀 News
+
+- **[2026.08.13]** 🔥 **Inference code** released - It is now possible to obtain results for the two tasks: (i) semantic gesture classification, and (ii) word recognition and localization, for any real-world video
 - **[2026.08.08]** 🧬 **Pre-trained** checkpoints released
 - **[2026.08.06]** 📋 Paper released on [arXiv](https://arxiv.org/abs/2605.31589)
 - **[2026.06.17]** 🏆 Our paper is accepted at **ECCV 2026**!!!
 
-## Installation
+---
+
+## ⚙️ Installation
 
 Clone the repository
-`git clone https://github.com/Sindhu-Hegde/grw.git`
+```bash
+git clone https://github.com/Sindhu-Hegde/grw.git
+```
 
 Install the required packages (it is recommended to create a new environment)
-```
+```bash
 python3.10 -m venv env_grw
 source env_grw/bin/activate
 pip install -r requirements.txt
 ```
 
-FFmpeg is also needed, install if not already present using: `sudo apt-get install ffmpeg==4.4.2`
+FFmpeg is also needed, install if not already present using: `sudo apt-get install ffmpeg`
 
-**Note:** The code has been tested with `Python 3.10.12`
+**Note:** The code has been tested with `Python 3.10.12` and `ffmpeg 4.4.2`
 
-  
-## The GRW Dataset
+---
 
-We present the GRW (Gesture Recognition in-the-Wild) dataset: A new word-level gesture dataset containing 155 unique semantic gesture words. 
+## 📊 The GRW Dataset
 
-Click on the [visualization page](https://www.robots.ox.ac.uk/~vgg/research/grw/dataset) to see sample videos from our dataset. 
+We present the GRW (Gesture Recognition in-the-Wild) dataset: A new word-level gesture dataset containing 155 unique semantic gesture words.
 
-### Download instructions 
+Click on the [visualization page](https://www.robots.ox.ac.uk/~vgg/research/grw/dataset) to see sample videos from our dataset.
+
+### Download instructions
 
 The csv files inside `files/` are the train and test datasets for the two tasks. These csv files contain the video-ids along with other annotations. They can be read by:
 
 ```python
 import pandas as pd
 
-# Semantic gesture classification 
+# Semantic gesture classification
 df_semantic_train = pd.read_csv("files/train_semantic_classification.csv")	# Semantic Gesture Classification train set
 df_semantic_test = pd.read_csv("files/test_semantic_classification.csv")	# Semantic Gesture Classification test set
 
@@ -76,38 +89,44 @@ To download and pre-process the videos to obtain gesture crops, run the followin
 cd preprocess
 
 # Download the videos from YouTube-ids and timestamps
-python download_videos.py --input_csv=<csv-file> --video_root=<raw-video-root>
+python download_videos.py --input_csv=<csv-file> --result_dir=<raw-video-root>
 
 # Crop the videos with the bounding-box co-ordinates provided in the csv files
-python crop_videos.py --input_csv=<raw-video-root> --video_dir=<preprocessed-video-root>
+python crop_videos.py --input_csv=<csv-file> --video_dir=<raw-video-root> --output_dir=<preprocessed-video-root>
 ```
 
-**Note:** Due to new YouTube policies, downloading videos (especially for train sets) might take a long time. Thus, we also provide the SHuBERT features (which is taken as input by our gesture models). Users can directly download the SHuBERT features as shown [below](https://github.com/Sindhu-Hegde/grw/tree/main#news-) and start the training/evaluation.
+**Note:** Due to new YouTube policies, downloading videos (especially for train sets) might take a long time. Thus, we also provide the SHuBERT features (which is taken as input by our gesture models). Users can directly download the SHuBERT features as shown [below](#download-shubert-features) and start the training/evaluation.
 
-Once the dataset is downloaded and pre-processed, the structure of the folders will be as follows:
+<details>
+<summary><b>Folder structure after download and pre-processing</b></summary>
 
-```
+```text
 raw_video_root (path of the downloaded raw videos)
 ├── *.mp4 (raw uncropped videos)
 ```
 
-```
+```text
 preprocessed_video_root (path of the pre-processed gesture videos)
 ├── word folders
 │   ├── *.mp4 (extracted person-specific gesture video)
 ```
 
+</details>
+
 #### Download SHuBERT features
 
 We provide pre-extracted SHuBERT features which are needed for training and evaluating our models. To download these features, run the following:
 
-|Feature set|Download Link|
+| Feature set | Download Link |
 |:--:|:--:|
-| Semantic Classification - Train | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/semantic_classification_train.tar.gz) | 
+| Semantic Classification - Train | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/semantic_classification_train.tar.gz) |
 | Semantic Classification - Test | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/semantic_classification_test.tar.gz) |
 | Semantic Classification - Test unseen words | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/semantic_classification_test_unseen_words.tar.gz) |
-| Word Recognition & Localization - Train | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/recognition_localization_train.tar.gz) | 
+| Word Recognition & Localization - Train | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/recognition_localization_train.tar.gz) |
 | Word Recognition & Localization - Test | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/recognition_localization_test.tar.gz) |
+
+<details>
+<summary><b>Verify downloads (checksums)</b></summary>
 
 Download the checksum file from [here](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/SHA512SUMS)
 After downloading all the files, they can be verified by the following:
@@ -130,29 +149,38 @@ grep "recognition_localization_test.tar.gz" SHA512SUMS | sha512sum -c
 recognition_localization_test.tar.gz: OK
 ```
 
+</details>
+
 Untar the downloaded files for training and evaluation:
 ```bash
 for f in *.tar.gz; do
     tar -xzf "$f"
 done
 ```
-The structure of the feature files will be as follows:
-```
+
+<details>
+<summary><b>Folder structure of the extracted features</b></summary>
+
+```text
 shubert_features (path of the extracted shubert features)
 ├── semantic_classification
 │   ├── split (<train>/<test>/<test_unseen_words>)
-│   │   ├── *.npy 
+│   │   ├── *.npy
 ├── recognition_localization
 │   ├── split (<train>/<test>)
-│   │   ├── *.npy 
+│   │   ├── *.npy
 ```
+
+</details>
 
 **Note:** The download and processing of the gesture videos can be SKIPPED if SHuBERT features are downloaded directly.
 
-## Checkpoints
+---
+
+## 💾 Checkpoints
 
 Download the trained models and save in `checkpoints` folder
-```
+```bash
 mkdir checkpoints
 cd checkpoints
 
@@ -167,49 +195,50 @@ wget https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/recognition_local
 wget https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/yolov8n.pt
 
 # [2] Dino fine-tuned for hands keypoint model
-wget https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/hand_dinov2.pth 
+wget https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/hand_dinov2.pth
 
 # [3] Hand keypoint model
-wget 
-https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/hand_landmarker.task 
+wget https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/hand_landmarker.task
 
-# [4] SHuBERT model 
-wget https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/shubert.pt 
+# [4] SHuBERT model
+wget https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/shubert.pt
 
+cd ..
 ```
-
 
 Alternatively, these checkpoints can also be downloaded directly from the links below:
 
-|Model|Download Link|
+| Model | Download Link |
 |:--:|:--:|
-| Semantic Classification model | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/semantic_classification.pth)  |
-| Word Recognition and Localization model | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/recognition_localization.pth) | 
-SHuBERT | 1. [YOLO](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/yolov8n.pt)<br>2. [Dino fine-tuned for hands](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/hand_dinov2.pth )<br>3. [Hand keypoint model](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/hand_landmarker.task)<br>4. [SHuBERT](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/shubert.pt) |
+| Semantic Classification model | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/semantic_classification.pth) |
+| Word Recognition and Localization model | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/recognition_localization.pth) |
+| SHuBERT | 1. [YOLO](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/yolov8n.pt)<br>2. [Dino fine-tuned for hands](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/hand_dinov2.pth)<br>3. [Hand keypoint model](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/hand_landmarker.task)<br>4. [SHuBERT](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/shubert.pt) |
 
-## Inference on a real-world video
+---
 
-#### Step-1: Pre-process the video
+## 🎯 Inference on a real-world video
+
+### Step-1: Pre-process the video
 
 The first step is to preprocess the video and obtain gesture crops. Run the following command to pre-process the video:
 
-```
+```bash
 python preprocess/inference_preprocess.py --video_file <path-to-video-file>
 ```
 
-The processed gesture video tracks are saved in: `<results/video_file/preprocessed/*.avi>`. The default save directory is `results`, this can be changed by specificying `--preprocessed_root` in the above command. Once the gesture tracks are extracted, the below script can be used to extract SHuBERT features.
+The processed gesture video tracks are saved in: `<results/video_file/preprocessed/*.avi>`. The default save directory is `results`, this can be changed by specifying `--preprocessed_root` in the above command. Once the gesture tracks are extracted, the below script can be used to extract SHuBERT features.
 
-#### Step-2: Extract SHuBERT features
+### Step-2: Extract SHuBERT features
 
-To extract SHuBERT features, `fairseq` need to be installed:
-```
+To extract SHuBERT features, `fairseq` needs to be installed:
+```bash
 cd models/fairseq
 pip install -e .
 cd ../..
 ```
 
 After installing, proceed to extract the features
-```
+```bash
 python preprocess/inference_shubert.py \
   --input_video=<preprocessed-video>  \
   --yolo_ckpt=checkpoints/yolov8n.pt \
@@ -218,40 +247,39 @@ python preprocess/inference_shubert.py \
   --shubert_ckpt=checkpoints/shubert.pt
 ```
 
-The SHuBERT features and metadata like hand videos are saved in: `results/preprocessed_video/preprocessed_video_shubert.npy`. The default save directory is `results`, this can be changed by specificying `--output_dir` in the above command. Once the features are extracted, the below script can be used to obtain predictions for the semantic classification, word recognition and localization tasks.
+The SHuBERT features and metadata like hand videos are saved in: `results/preprocessed_video/preprocessed_video_shubert.npy`. The default save directory is `results`, this can be changed by specifying `--output_dir` in the above command. Once the features are extracted, the below script can be used to obtain predictions for the semantic classification, word recognition and localization tasks.
 
-#### Step-3: Inference: (i) Semantic classification and (ii) Word recognition & localization
+### Step-3: Inference: (i) Semantic classification and (ii) Word recognition & localization
 
-```bash 
+```bash
 python inference.py \
   --input_feature=<extracted-SHuBERT-feature> \
   --model_semantic_classification=checkpoints/semantic_classification.pth \
   --model_recognition_localization=checkpoints/recognition_localization.pth
 ```
 
-The outputs for the three tasks are displayed on the terminal. 
-For semantic classification, the default threshold set is `0.7` This can be modified using `--semantic_thr` flag.
+The outputs for the downstream tasks are displayed on the terminal.
+For semantic classification, the default threshold set is `0.7`. This can be modified using `--semantic_thr` flag.
 
-    
-For a quick test, the following pre-extracted features are available in `samples` folder: 
+For a quick test, the following pre-extracted features are available in `samples` folder:
 - `bye.mp4`, `bye_shubert.npy`
 - `below.mp4`, `below_shubert.npy`
 
-Note: Steps 1 & 2 need to be skipped for these examples, since they are already pre-processed.
+**Note:** Steps 1 & 2 need to be skipped for these examples, since they are already pre-processed.
 
 Example run:
 ```bash
-python inference.py \ 
-  --input_feature=samples/bye.npy \
+python inference.py \
+  --input_feature=samples/bye_shubert.npy \
   --model_semantic_classification=checkpoints/semantic_classification.pth \
   --model_recognition_localization=checkpoints/recognition_localization.pth
 ```
 
-On running the above command, the following outputs are displayed: 
+On running the above command, the following outputs are displayed:
 
-```
-Loaded checkpoint from: /work/sindhu/ckpts/grw_github/semantic_classification.pth
-Loaded checkpoint from: /work/sindhu/ckpts/grw_github/recognition_localization.pth
+```text
+Loaded checkpoint from: checkpoints/semantic_classification.pth
+Loaded checkpoint from: checkpoints/recognition_localization.pth
 Loaded SHuBERT visual features:  torch.Size([100, 12, 768])
 ----------------------------------
 ----------- RESULTS --------------
@@ -259,7 +287,7 @@ Loaded SHuBERT visual features:  torch.Size([100, 12, 768])
 
 Semantic classification prediction:
   'Semantic' class
-  
+
 Word classification top-5 predictions:
   1. bye
   2. below
@@ -271,18 +299,22 @@ Gesture localization (boundary) prediction:
   Gesture start frame: 61 | Gesture end frame: 91
 ```
 
-## Evaluation 
+---
+
+## 📈 Evaluation
 
 To reproduce the scores reported in paper, follow the steps illustrated below:
 
-#### Step-1: Download the SHuBERT test features 
-Use the links above to download and unzip the SHuBERT test features
+### Step-1: Download the SHuBERT test features
 
-#### Step-2: Compute the metrics
+Use the links [above](#download-shubert-features) to download and unzip the SHuBERT test features
 
-##### Task-1:
-```
-python evaluate_semantic_classification.py 
+### Step-2: Compute the metrics
+
+#### Task-1: Semantic gesture classification
+
+```bash
+python evaluate_semantic_classification.py \
   --test_csv=files/test_semantic_classification.csv \
   --checkpoint_path=checkpoints/semantic_classification.pth \
   --feature_dir=shubert_features/semantic_classification/test
@@ -290,14 +322,20 @@ python evaluate_semantic_classification.py
 
 The results obtained are displayed below:
 
+<div align="center">
+
+*Semantic gesture classification on the GRW test set*
+
 | Accuracy | Precision | Recall | High-confidence Accuracy |
 |:--:|:--:|:--:|:--:|
-| 75.83 | 79.91 | 69.00 | 93.20 |
+| **75.83** | **79.91** | **69.00** | **93.20** |
 
+</div>
 
-##### Task-2:
-```
-python evaluate_recognition_localization.py 
+#### Task-2: Word recognition and localization
+
+```bash
+python evaluate_recognition_localization.py \
   --test_csv=files/test_recognition_localization.csv \
   --checkpoint_path=checkpoints/recognition_localization.pth \
   --feature_dir=shubert_features/recognition_localization/test
@@ -305,22 +343,32 @@ python evaluate_recognition_localization.py
 
 The results obtained are displayed below:
 
+<div align="center">
+
+*Word recognition and localization on the GRW test set*
+
 | Acc@1 | Acc@5 | Acc@10 | mIoU |
 |:--:|:--:|:--:|:--:|
-| 18.35 | 37.30 | 51.70 | 0.67 |
+| **18.35** | **37.30** | **51.70** | **0.67** |
+
+</div>
 
 The predictions from the recognition and localization model are saved in: `preds.csv`
 
-## Training
+---
+
+## 🏋️ Training
 
 Training details coming soon, stay tuned!
 
-## Citation  
+---
+
+## 📖 Citation
 
 If you find this work useful for your research, please consider citing our paper:
 
 ```bibtex
-@inproceeding{hegde_eccv_2026,
+@inproceedings{hegde_eccv_2026,
   title={Recognizing Co-Speech Gestures in-the-Wild},
   author={Sindhu B Hegde and K R Prajwal and Andrew Zisserman},
   year={2026},
