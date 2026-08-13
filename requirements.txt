@@ -1,0 +1,56 @@
+datasets==3.3.2
+decorator==5.1.1
+decord==0.6.0
+einops==0.8.0
+executor==23.2
+huggingface-hub==0.33.0
+imageio==2.37.0
+linear-attention-transformer==0.19.1
+llvmlite==0.44.0
+matplotlib==3.10.0
+mediapipe==0.10.20
+moviepy==2.1.2
+numba==0.61.0
+numpy==1.26.4
+opencv-contrib-python==4.11.0.86
+opencv-python==4.11.0.86
+pandas==2.2.3
+pillow==10.4.0
+protobuf==4.25.6
+protobuf3-to-dict==0.1.5
+psutil==7.2.2
+pytorch-metric-learning==2.8.1
+scenedetect==0.6.5.2
+scikit-learn==1.6.1
+scipy==1.15.1
+seaborn==0.13.2
+sentence-transformers==4.1.0
+soxr==0.5.0.post1
+spacy==3.8.4
+tables==3.10.1
+tokenizers==0.21.0
+torch==2.6.0
+torchaudio==2.6.0
+torchmetrics==1.7.0
+torchvision==0.21.0
+tqdm==4.67.1
+transformers==4.52.4
+ultralytics==8.3.69
+ultralytics-thop==2.0.14
+urllib3==2.3.0
+wandb==0.19.5
+yt-dlp==2025.6.30
+
+# Required by fairseq (models/fairseq). Pinned here so that `pip install -e .`
+# cannot resolve them to versions that conflict with the pins above.
+# NOTE: omegaconf 2.0.6 ships invalid metadata that pip >= 24.1 rejects, so this
+# file must be installed with pip < 24.1. See the Installation section of README.
+antlr4-python3-runtime==4.8
+bitarray==3.10.1
+cffi==2.1.1
+Cython==3.2.9
+hydra-core==1.0.7
+omegaconf==2.0.6
+PyYAML==6.0.3
+regex==2026.7.19
+sacrebleu==2.6.0

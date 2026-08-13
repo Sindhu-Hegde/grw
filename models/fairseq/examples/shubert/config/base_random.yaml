@@ -1,0 +1,78 @@
+# @package _group_
+
+common:
+  fp16: true
+  log_format: json
+  log_interval: 200
+  tensorboard_logdir: tb
+
+checkpoint:
+  save_interval: 10
+  save_interval_updates: 50000
+  keep_interval_updates: 10
+  no_epoch_checkpoints: true
+  load_checkpoint_on_all_dp_ranks: true
+
+task:
+  _name: audio_pretraining
+  data: /path_to_manifest_directory/manifest_file.csv
+  kmeans_label_paths:
+      face: /path_to_face_kmeans_file/face_256.km
+      left_hand: /path_to_left_hand_kmeans_file/lhand_256.km
+      right_hand: /path_to_right_hand_kmeans_file/rhand_256.km
+      body_posture: /path_to_body_posture_kmeans_file/body_256.km
+  max_sample_size: 5000
+  min_sample_size: 1
+  normalize: true
+  sample_rate: 1
+
+dataset:
+  num_workers: 16
+  max_tokens: 15000
+  skip_invalid_size_inputs_valid_test: true
+  validate_interval: 100
+  required_batch_size_multiple: 1
+  disable_validation: true
+
+distributed_training:
+  distributed_world_size: 8
+  ddp_backend: legacy_ddp
+
+criterion:
+  _name: model
+
+optimization:
+  max_update: 400000
+  lr: [0.0005]
+
+optimizer:
+  _name: adam
+  adam_betas: (0.9,0.98)
+  adam_eps: 1e-06
+  weight_decay: 0.01
+
+lr_scheduler:
+  _name: polynomial_decay
+  warmup_updates: 32000
+
+model:
+  _name: shubert
+  extractor_mode: layer_norm
+  encoder_layerdrop: 0.05
+  dropout_input: 0.0
+  dropout_features: 0.0
+  feature_grad_mult: 1.0
+  encoder_embed_dim: 768
+
+  codebook_size: 256
+
+  mask_prob: 0.8
+  mask_length: 3
+
+  require_same_masks: true
+  mask_dropout: 0
+
+  channels_embed_dim: 384
+  channels_pose_embed_dim: 14
+  intermediate_dim: 1024
+  mask_strategy: random

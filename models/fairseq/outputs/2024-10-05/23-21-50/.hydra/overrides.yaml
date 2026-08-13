@@ -1,0 +1,5 @@
+- common.user_dir=/share/data/pals/shester/sign_dinosr/fairseq/examples/dinosr
+- checkpoint.save_dir=/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_400_10percent/ckpt
+- common.log_file=/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_400_10percent/log.txt
+- common.tensorboard_logdir=/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_400_10percent/tb
+- distributed_training.distributed_world_size=8

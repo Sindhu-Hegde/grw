@@ -1,0 +1,974 @@
+[2024-10-02 23:34:51,590][fairseq_cli.train][INFO] - {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 200, 'log_format': 'json', 'log_file': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/log.txt', 'aim_repo': None, 'aim_run_hash': None, 'tensorboard_logdir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/tb', 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': True, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'on_cpu_convert_precision': False, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'amp': False, 'amp_batch_retries': 2, 'amp_init_scale': 128, 'amp_scale_window': None, 'user_dir': '/share/data/pals/shester/sign_dinosr/fairseq/examples/dinosr', 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': None, 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 8, 'distributed_num_procs': 8, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': 'tcp://localhost:13059', 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'legacy_ddp', 'ddp_comm_hook': 'none', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'gradient_as_bucket_view': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_base_algorithm': 'localsgd', 'localsgd_frequency': 3, 'nprocs_per_node': 8, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': True, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'use_sharded_state': False, 'not_fsdp_flatten_parameters': False}, 'dataset': {'_name': None, 'num_workers': 16, 'skip_invalid_size_inputs_valid_test': True, 'max_tokens': 15000, 'batch_size': None, 'required_batch_size_multiple': 1, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'combine_valid_subsets': None, 'ignore_unused_valid_subsets': False, 'validate_interval': 5, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': True, 'max_tokens_valid': 15000, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0, 'grouped_shuffling': False, 'update_epoch_batch_itr': False, 'update_ordered_indices_seed': False}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 80000, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': False, 'update_freq': [1], 'lr': [0.0005], 'stop_min_lr': -1.0, 'use_bmuf': False, 'skip_remainder_batch': False}, 'checkpoint': {'_name': None, 'save_dir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt', 'restore_file': 'checkpoint_last.pt', 'continue_once': None, 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 20000, 'keep_interval_updates': 10, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': True, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'loss', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': True, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 8}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 0, 'input': '-'}, 'model': {'_name': 'signhubert', 'extractor_mode': layer_norm, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.0, 'dropout_features': 0.0, 'final_dim': 0, 'layer_norm_first': False, 'conv_feature_layers': '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]', 'conv_bias': False, 'logit_temp': 0.1, 'quantize_targets': False, 'quantize_input': False, 'same_quantizer': False, 'target_glu': False, 'feature_grad_mult': 1.0, 'quantizer_depth': 1, 'quantizer_factor': 3, 'latent_vars': 320, 'latent_groups': 2, 'latent_dim': 0, 'mask_length': 3, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'require_same_masks': True, 'mask_dropout': 0.0, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_before': False, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'num_negatives': 100, 'negatives_from_everywhere': False, 'cross_sample_negatives': 0, 'codebook_negatives': 0, 'conv_pos': 32, 'conv_pos_groups': 16, 'pos_conv_depth': 1, 'latent_temp': [2.0, 0.5, 0.999995], 'max_positions': 100000, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'crop_seq_to_multiple': 1, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False, 'discrete': True, 'codebook_size': 256, 'max_update': '${optimization.max_update}', 'channels_embed_dim': 384, 'channels_pose_embed_dim': 14, 'intermediate_dim': 1024, 'mask_strategy': 'random'}, 'task': {'_name': 'audio_pretraining', 'data': '/share/data/pals/shester/sign_dinosr_logs/dataset/train_ssl_ysl25_ase_800k.csv', 'labels': None, 'binarized_dataset': False, 'sample_rate': 1, 'normalize': True, 'enable_padding': False, 'max_sample_size': 1000, 'min_sample_size': 1, 'num_batch_buckets': 0, 'precompute_mask_indices': False, 'inferred_w2v_config': None, 'kmeans_label_paths': {'face': '/scratch/shester/km_labels/ysl25/ase800/face/face_256.km', 'left_hand': '/scratch/shester/km_labels/ysl25/ase800/lhand/lhand_256.km', 'right_hand': '/scratch/shester/km_labels/ysl25/ase800/rhand/rhand_256.km', 'body_posture': '/scratch/shester/km_labels/ysl25/ase800/body/body_256.km'}, 'tpu': False, 'text_compression_level': none}, 'criterion': {'_name': 'model', 'loss_weights': {}, 'log_keys': []}, 'optimizer': {'_name': 'adam', 'adam_betas': '(0.9,0.98)', 'adam_eps': 1e-06, 'weight_decay': 0.01, 'use_old_adam': False, 'fp16_adam_stats': False, 'tpu': False, 'lr': [0.0005]}, 'lr_scheduler': {'_name': 'tri_stage', 'warmup_steps': 0, 'hold_steps': 0, 'decay_steps': 0, 'phase_ratio': [0.03, 0.47, 0.5], 'init_lr_scale': 0.01, 'final_lr_scale': 0.01, 'max_update': 80000.0, 'lr': [0.0005]}, 'scoring': None, 'bpe': None, 'tokenizer': None, 'ema': {'_name': None, 'store_ema': False, 'ema_decay': 0.9999, 'ema_start_update': 0, 'ema_seed_model': None, 'ema_update_freq': 1, 'ema_fp32': False}, 'job_logging_cfg': {'version': 1, 'formatters': {'simple': {'format': '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'}}, 'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'simple', 'stream': 'ext://sys.stdout'}, 'file': {'class': 'logging.FileHandler', 'formatter': 'simple', 'filename': 'hydra_train.log'}}, 'root': {'level': 'INFO', 'handlers': ['console', 'file']}, 'disable_existing_loggers': False}}
+[2024-10-02 23:34:52,536][fairseq_cli.train][INFO] - {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 200, 'log_format': 'json', 'log_file': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/log.txt', 'aim_repo': None, 'aim_run_hash': None, 'tensorboard_logdir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/tb', 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': True, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'on_cpu_convert_precision': False, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'amp': False, 'amp_batch_retries': 2, 'amp_init_scale': 128, 'amp_scale_window': None, 'user_dir': '/share/data/pals/shester/sign_dinosr/fairseq/examples/dinosr', 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': None, 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 8, 'distributed_num_procs': 8, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': 'tcp://localhost:14989', 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'legacy_ddp', 'ddp_comm_hook': 'none', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'gradient_as_bucket_view': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_base_algorithm': 'localsgd', 'localsgd_frequency': 3, 'nprocs_per_node': 8, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': True, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'use_sharded_state': False, 'not_fsdp_flatten_parameters': False}, 'dataset': {'_name': None, 'num_workers': 16, 'skip_invalid_size_inputs_valid_test': True, 'max_tokens': 15000, 'batch_size': None, 'required_batch_size_multiple': 1, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'combine_valid_subsets': None, 'ignore_unused_valid_subsets': False, 'validate_interval': 5, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': True, 'max_tokens_valid': 15000, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0, 'grouped_shuffling': False, 'update_epoch_batch_itr': False, 'update_ordered_indices_seed': False}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 80000, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': False, 'update_freq': [1], 'lr': [0.0005], 'stop_min_lr': -1.0, 'use_bmuf': False, 'skip_remainder_batch': False}, 'checkpoint': {'_name': None, 'save_dir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt', 'restore_file': 'checkpoint_last.pt', 'continue_once': None, 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 20000, 'keep_interval_updates': 10, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': True, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'loss', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': True, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 8}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 0, 'input': '-'}, 'model': {'_name': 'signhubert', 'extractor_mode': layer_norm, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.0, 'dropout_features': 0.0, 'final_dim': 0, 'layer_norm_first': False, 'conv_feature_layers': '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]', 'conv_bias': False, 'logit_temp': 0.1, 'quantize_targets': False, 'quantize_input': False, 'same_quantizer': False, 'target_glu': False, 'feature_grad_mult': 1.0, 'quantizer_depth': 1, 'quantizer_factor': 3, 'latent_vars': 320, 'latent_groups': 2, 'latent_dim': 0, 'mask_length': 3, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'require_same_masks': True, 'mask_dropout': 0.0, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_before': False, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'num_negatives': 100, 'negatives_from_everywhere': False, 'cross_sample_negatives': 0, 'codebook_negatives': 0, 'conv_pos': 32, 'conv_pos_groups': 16, 'pos_conv_depth': 1, 'latent_temp': [2.0, 0.5, 0.999995], 'max_positions': 100000, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'crop_seq_to_multiple': 1, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False, 'discrete': True, 'codebook_size': 256, 'max_update': '${optimization.max_update}', 'channels_embed_dim': 384, 'channels_pose_embed_dim': 14, 'intermediate_dim': 1024, 'mask_strategy': 'random'}, 'task': {'_name': 'audio_pretraining', 'data': '/share/data/pals/shester/sign_dinosr_logs/dataset/train_ssl_ysl25_ase_800k.csv', 'labels': None, 'binarized_dataset': False, 'sample_rate': 1, 'normalize': True, 'enable_padding': False, 'max_sample_size': 1000, 'min_sample_size': 1, 'num_batch_buckets': 0, 'precompute_mask_indices': False, 'inferred_w2v_config': None, 'kmeans_label_paths': {'face': '/scratch/shester/km_labels/ysl25/ase800/face/face_256.km', 'left_hand': '/scratch/shester/km_labels/ysl25/ase800/lhand/lhand_256.km', 'right_hand': '/scratch/shester/km_labels/ysl25/ase800/rhand/rhand_256.km', 'body_posture': '/scratch/shester/km_labels/ysl25/ase800/body/body_256.km'}, 'tpu': False, 'text_compression_level': none}, 'criterion': {'_name': 'model', 'loss_weights': {}, 'log_keys': []}, 'optimizer': {'_name': 'adam', 'adam_betas': '(0.9,0.98)', 'adam_eps': 1e-06, 'weight_decay': 0.01, 'use_old_adam': False, 'fp16_adam_stats': False, 'tpu': False, 'lr': [0.0005]}, 'lr_scheduler': {'_name': 'tri_stage', 'warmup_steps': 0, 'hold_steps': 0, 'decay_steps': 0, 'phase_ratio': [0.03, 0.47, 0.5], 'init_lr_scale': 0.01, 'final_lr_scale': 0.01, 'max_update': 80000.0, 'lr': [0.0005]}, 'scoring': None, 'bpe': None, 'tokenizer': None, 'ema': {'_name': None, 'store_ema': False, 'ema_decay': 0.9999, 'ema_start_update': 0, 'ema_seed_model': None, 'ema_update_freq': 1, 'ema_fp32': False}, 'job_logging_cfg': {'version': 1, 'formatters': {'simple': {'format': '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'}}, 'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'simple', 'stream': 'ext://sys.stdout'}, 'file': {'class': 'logging.FileHandler', 'formatter': 'simple', 'filename': 'hydra_train.log'}}, 'root': {'level': 'INFO', 'handlers': ['console', 'file']}, 'disable_existing_loggers': False}}
+[2024-10-02 23:34:55,473][fairseq_cli.train][INFO] - SignHubertModel(
+  (post_extract_proj): Linear(in_features=1024, out_features=768, bias=True)
+  (dropout_input): Dropout(p=0.0, inplace=False)
+  (dropout_features): Dropout(p=0.0, inplace=False)
+  (encoder): TransformerEncoder(
+    (pos_conv): Sequential(
+      (0): Conv1d(768, 768, kernel_size=(32,), stride=(1,), padding=(16,), groups=16)
+      (1): SamePad()
+      (2): GELU(approximate='none')
+    )
+    (layers): ModuleList(
+      (0-11): 12 x TransformerSentenceEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=768, out_features=768, bias=True)
+          (v_proj): Linear(in_features=768, out_features=768, bias=True)
+          (q_proj): Linear(in_features=768, out_features=768, bias=True)
+          (out_proj): Linear(in_features=768, out_features=768, bias=True)
+        )
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.0, inplace=False)
+        (dropout3): Dropout(p=0.1, inplace=False)
+        (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+  )
+  (layer_norm): LayerNorm((1536,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_face): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_lhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_rhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_body): LayerNorm((14,), eps=1e-05, elementwise_affine=True)
+  (heads): ModuleList(
+    (0-3): 4 x Linear(in_features=768, out_features=256, bias=True)
+  )
+  (face_proj): Linear(in_features=384, out_features=256, bias=True)
+  (left_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (right_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (body_posture_proj): Linear(in_features=14, out_features=256, bias=True)
+)
+[2024-10-02 23:34:55,475][fairseq_cli.train][INFO] - task: AudioPretrainingTask
+[2024-10-02 23:34:55,475][fairseq_cli.train][INFO] - model: SignHubertModel
+[2024-10-02 23:34:55,476][fairseq_cli.train][INFO] - criterion: ModelCriterion
+[2024-10-02 23:34:55,476][fairseq_cli.train][INFO] - num. shared model params: 88,116,284 (num. trained: 88,116,284)
+[2024-10-02 23:34:55,477][fairseq_cli.train][INFO] - num. expert model params: 0 (num. trained: 0)
+[2024-10-02 23:34:55,885][fairseq_cli.train][INFO] - SignHubertModel(
+  (post_extract_proj): Linear(in_features=1024, out_features=768, bias=True)
+  (dropout_input): Dropout(p=0.0, inplace=False)
+  (dropout_features): Dropout(p=0.0, inplace=False)
+  (encoder): TransformerEncoder(
+    (pos_conv): Sequential(
+      (0): Conv1d(768, 768, kernel_size=(32,), stride=(1,), padding=(16,), groups=16)
+      (1): SamePad()
+      (2): GELU(approximate='none')
+    )
+    (layers): ModuleList(
+      (0-11): 12 x TransformerSentenceEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=768, out_features=768, bias=True)
+          (v_proj): Linear(in_features=768, out_features=768, bias=True)
+          (q_proj): Linear(in_features=768, out_features=768, bias=True)
+          (out_proj): Linear(in_features=768, out_features=768, bias=True)
+        )
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.0, inplace=False)
+        (dropout3): Dropout(p=0.1, inplace=False)
+        (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+  )
+  (layer_norm): LayerNorm((1536,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_face): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_lhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_rhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_body): LayerNorm((14,), eps=1e-05, elementwise_affine=True)
+  (heads): ModuleList(
+    (0-3): 4 x Linear(in_features=768, out_features=256, bias=True)
+  )
+  (face_proj): Linear(in_features=384, out_features=256, bias=True)
+  (left_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (right_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (body_posture_proj): Linear(in_features=14, out_features=256, bias=True)
+)
+[2024-10-02 23:34:55,887][fairseq_cli.train][INFO] - task: AudioPretrainingTask
+[2024-10-02 23:34:55,887][fairseq_cli.train][INFO] - model: SignHubertModel
+[2024-10-02 23:34:55,887][fairseq_cli.train][INFO] - criterion: ModelCriterion
+[2024-10-02 23:34:55,888][fairseq_cli.train][INFO] - num. shared model params: 88,116,284 (num. trained: 88,116,284)
+[2024-10-02 23:34:55,889][fairseq_cli.train][INFO] - num. expert model params: 0 (num. trained: 0)
+[2024-10-02 23:34:57,167][fairseq_cli.train][INFO] - {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 200, 'log_format': 'json', 'log_file': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/log.txt', 'aim_repo': None, 'aim_run_hash': None, 'tensorboard_logdir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/tb', 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': True, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'on_cpu_convert_precision': False, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'amp': False, 'amp_batch_retries': 2, 'amp_init_scale': 128, 'amp_scale_window': None, 'user_dir': '/share/data/pals/shester/sign_dinosr/fairseq/examples/dinosr', 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': None, 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 8, 'distributed_num_procs': 8, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': 'tcp://localhost:13065', 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'legacy_ddp', 'ddp_comm_hook': 'none', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'gradient_as_bucket_view': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_base_algorithm': 'localsgd', 'localsgd_frequency': 3, 'nprocs_per_node': 8, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': True, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'use_sharded_state': False, 'not_fsdp_flatten_parameters': False}, 'dataset': {'_name': None, 'num_workers': 16, 'skip_invalid_size_inputs_valid_test': True, 'max_tokens': 15000, 'batch_size': None, 'required_batch_size_multiple': 1, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'combine_valid_subsets': None, 'ignore_unused_valid_subsets': False, 'validate_interval': 5, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': True, 'max_tokens_valid': 15000, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0, 'grouped_shuffling': False, 'update_epoch_batch_itr': False, 'update_ordered_indices_seed': False}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 80000, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': False, 'update_freq': [1], 'lr': [0.0005], 'stop_min_lr': -1.0, 'use_bmuf': False, 'skip_remainder_batch': False}, 'checkpoint': {'_name': None, 'save_dir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt', 'restore_file': 'checkpoint_last.pt', 'continue_once': None, 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 20000, 'keep_interval_updates': 10, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': True, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'loss', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': True, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 8}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 0, 'input': '-'}, 'model': {'_name': 'signhubert', 'extractor_mode': layer_norm, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.0, 'dropout_features': 0.0, 'final_dim': 0, 'layer_norm_first': False, 'conv_feature_layers': '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]', 'conv_bias': False, 'logit_temp': 0.1, 'quantize_targets': False, 'quantize_input': False, 'same_quantizer': False, 'target_glu': False, 'feature_grad_mult': 1.0, 'quantizer_depth': 1, 'quantizer_factor': 3, 'latent_vars': 320, 'latent_groups': 2, 'latent_dim': 0, 'mask_length': 3, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'require_same_masks': True, 'mask_dropout': 0.0, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_before': False, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'num_negatives': 100, 'negatives_from_everywhere': False, 'cross_sample_negatives': 0, 'codebook_negatives': 0, 'conv_pos': 32, 'conv_pos_groups': 16, 'pos_conv_depth': 1, 'latent_temp': [2.0, 0.5, 0.999995], 'max_positions': 100000, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'crop_seq_to_multiple': 1, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False, 'discrete': True, 'codebook_size': 256, 'max_update': '${optimization.max_update}', 'channels_embed_dim': 384, 'channels_pose_embed_dim': 14, 'intermediate_dim': 1024, 'mask_strategy': 'random'}, 'task': {'_name': 'audio_pretraining', 'data': '/share/data/pals/shester/sign_dinosr_logs/dataset/train_ssl_ysl25_ase_800k.csv', 'labels': None, 'binarized_dataset': False, 'sample_rate': 1, 'normalize': True, 'enable_padding': False, 'max_sample_size': 1000, 'min_sample_size': 1, 'num_batch_buckets': 0, 'precompute_mask_indices': False, 'inferred_w2v_config': None, 'kmeans_label_paths': {'face': '/scratch/shester/km_labels/ysl25/ase800/face/face_256.km', 'left_hand': '/scratch/shester/km_labels/ysl25/ase800/lhand/lhand_256.km', 'right_hand': '/scratch/shester/km_labels/ysl25/ase800/rhand/rhand_256.km', 'body_posture': '/scratch/shester/km_labels/ysl25/ase800/body/body_256.km'}, 'tpu': False, 'text_compression_level': none}, 'criterion': {'_name': 'model', 'loss_weights': {}, 'log_keys': []}, 'optimizer': {'_name': 'adam', 'adam_betas': '(0.9,0.98)', 'adam_eps': 1e-06, 'weight_decay': 0.01, 'use_old_adam': False, 'fp16_adam_stats': False, 'tpu': False, 'lr': [0.0005]}, 'lr_scheduler': {'_name': 'tri_stage', 'warmup_steps': 0, 'hold_steps': 0, 'decay_steps': 0, 'phase_ratio': [0.03, 0.47, 0.5], 'init_lr_scale': 0.01, 'final_lr_scale': 0.01, 'max_update': 80000.0, 'lr': [0.0005]}, 'scoring': None, 'bpe': None, 'tokenizer': None, 'ema': {'_name': None, 'store_ema': False, 'ema_decay': 0.9999, 'ema_start_update': 0, 'ema_seed_model': None, 'ema_update_freq': 1, 'ema_fp32': False}, 'job_logging_cfg': {'version': 1, 'formatters': {'simple': {'format': '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'}}, 'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'simple', 'stream': 'ext://sys.stdout'}, 'file': {'class': 'logging.FileHandler', 'formatter': 'simple', 'filename': 'hydra_train.log'}}, 'root': {'level': 'INFO', 'handlers': ['console', 'file']}, 'disable_existing_loggers': False}}
+[2024-10-02 23:34:58,137][fairseq_cli.train][INFO] - {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 200, 'log_format': 'json', 'log_file': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/log.txt', 'aim_repo': None, 'aim_run_hash': None, 'tensorboard_logdir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/tb', 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': True, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'on_cpu_convert_precision': False, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'amp': False, 'amp_batch_retries': 2, 'amp_init_scale': 128, 'amp_scale_window': None, 'user_dir': '/share/data/pals/shester/sign_dinosr/fairseq/examples/dinosr', 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': None, 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 8, 'distributed_num_procs': 8, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': 'tcp://localhost:10796', 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'legacy_ddp', 'ddp_comm_hook': 'none', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'gradient_as_bucket_view': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_base_algorithm': 'localsgd', 'localsgd_frequency': 3, 'nprocs_per_node': 8, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': True, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'use_sharded_state': False, 'not_fsdp_flatten_parameters': False}, 'dataset': {'_name': None, 'num_workers': 16, 'skip_invalid_size_inputs_valid_test': True, 'max_tokens': 15000, 'batch_size': None, 'required_batch_size_multiple': 1, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'combine_valid_subsets': None, 'ignore_unused_valid_subsets': False, 'validate_interval': 5, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': True, 'max_tokens_valid': 15000, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0, 'grouped_shuffling': False, 'update_epoch_batch_itr': False, 'update_ordered_indices_seed': False}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 80000, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': False, 'update_freq': [1], 'lr': [0.0005], 'stop_min_lr': -1.0, 'use_bmuf': False, 'skip_remainder_batch': False}, 'checkpoint': {'_name': None, 'save_dir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt', 'restore_file': 'checkpoint_last.pt', 'continue_once': None, 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 20000, 'keep_interval_updates': 10, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': True, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'loss', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': True, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 8}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 0, 'input': '-'}, 'model': {'_name': 'signhubert', 'extractor_mode': layer_norm, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.0, 'dropout_features': 0.0, 'final_dim': 0, 'layer_norm_first': False, 'conv_feature_layers': '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]', 'conv_bias': False, 'logit_temp': 0.1, 'quantize_targets': False, 'quantize_input': False, 'same_quantizer': False, 'target_glu': False, 'feature_grad_mult': 1.0, 'quantizer_depth': 1, 'quantizer_factor': 3, 'latent_vars': 320, 'latent_groups': 2, 'latent_dim': 0, 'mask_length': 3, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'require_same_masks': True, 'mask_dropout': 0.0, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_before': False, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'num_negatives': 100, 'negatives_from_everywhere': False, 'cross_sample_negatives': 0, 'codebook_negatives': 0, 'conv_pos': 32, 'conv_pos_groups': 16, 'pos_conv_depth': 1, 'latent_temp': [2.0, 0.5, 0.999995], 'max_positions': 100000, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'crop_seq_to_multiple': 1, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False, 'discrete': True, 'codebook_size': 256, 'max_update': '${optimization.max_update}', 'channels_embed_dim': 384, 'channels_pose_embed_dim': 14, 'intermediate_dim': 1024, 'mask_strategy': 'random'}, 'task': {'_name': 'audio_pretraining', 'data': '/share/data/pals/shester/sign_dinosr_logs/dataset/train_ssl_ysl25_ase_800k.csv', 'labels': None, 'binarized_dataset': False, 'sample_rate': 1, 'normalize': True, 'enable_padding': False, 'max_sample_size': 1000, 'min_sample_size': 1, 'num_batch_buckets': 0, 'precompute_mask_indices': False, 'inferred_w2v_config': None, 'kmeans_label_paths': {'face': '/scratch/shester/km_labels/ysl25/ase800/face/face_256.km', 'left_hand': '/scratch/shester/km_labels/ysl25/ase800/lhand/lhand_256.km', 'right_hand': '/scratch/shester/km_labels/ysl25/ase800/rhand/rhand_256.km', 'body_posture': '/scratch/shester/km_labels/ysl25/ase800/body/body_256.km'}, 'tpu': False, 'text_compression_level': none}, 'criterion': {'_name': 'model', 'loss_weights': {}, 'log_keys': []}, 'optimizer': {'_name': 'adam', 'adam_betas': '(0.9,0.98)', 'adam_eps': 1e-06, 'weight_decay': 0.01, 'use_old_adam': False, 'fp16_adam_stats': False, 'tpu': False, 'lr': [0.0005]}, 'lr_scheduler': {'_name': 'tri_stage', 'warmup_steps': 0, 'hold_steps': 0, 'decay_steps': 0, 'phase_ratio': [0.03, 0.47, 0.5], 'init_lr_scale': 0.01, 'final_lr_scale': 0.01, 'max_update': 80000.0, 'lr': [0.0005]}, 'scoring': None, 'bpe': None, 'tokenizer': None, 'ema': {'_name': None, 'store_ema': False, 'ema_decay': 0.9999, 'ema_start_update': 0, 'ema_seed_model': None, 'ema_update_freq': 1, 'ema_fp32': False}, 'job_logging_cfg': {'version': 1, 'formatters': {'simple': {'format': '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'}}, 'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'simple', 'stream': 'ext://sys.stdout'}, 'file': {'class': 'logging.FileHandler', 'formatter': 'simple', 'filename': 'hydra_train.log'}}, 'root': {'level': 'INFO', 'handlers': ['console', 'file']}, 'disable_existing_loggers': False}}
+[2024-10-02 23:34:59,216][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:34:59,344][fairseq_cli.train][INFO] - {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 200, 'log_format': 'json', 'log_file': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/log.txt', 'aim_repo': None, 'aim_run_hash': None, 'tensorboard_logdir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/tb', 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': True, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'on_cpu_convert_precision': False, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'amp': False, 'amp_batch_retries': 2, 'amp_init_scale': 128, 'amp_scale_window': None, 'user_dir': '/share/data/pals/shester/sign_dinosr/fairseq/examples/dinosr', 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': None, 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 8, 'distributed_num_procs': 8, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': 'tcp://localhost:11320', 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'legacy_ddp', 'ddp_comm_hook': 'none', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'gradient_as_bucket_view': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_base_algorithm': 'localsgd', 'localsgd_frequency': 3, 'nprocs_per_node': 8, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': True, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'use_sharded_state': False, 'not_fsdp_flatten_parameters': False}, 'dataset': {'_name': None, 'num_workers': 16, 'skip_invalid_size_inputs_valid_test': True, 'max_tokens': 15000, 'batch_size': None, 'required_batch_size_multiple': 1, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'combine_valid_subsets': None, 'ignore_unused_valid_subsets': False, 'validate_interval': 5, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': True, 'max_tokens_valid': 15000, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0, 'grouped_shuffling': False, 'update_epoch_batch_itr': False, 'update_ordered_indices_seed': False}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 80000, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': False, 'update_freq': [1], 'lr': [0.0005], 'stop_min_lr': -1.0, 'use_bmuf': False, 'skip_remainder_batch': False}, 'checkpoint': {'_name': None, 'save_dir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt', 'restore_file': 'checkpoint_last.pt', 'continue_once': None, 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 20000, 'keep_interval_updates': 10, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': True, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'loss', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': True, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 8}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 0, 'input': '-'}, 'model': {'_name': 'signhubert', 'extractor_mode': layer_norm, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.0, 'dropout_features': 0.0, 'final_dim': 0, 'layer_norm_first': False, 'conv_feature_layers': '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]', 'conv_bias': False, 'logit_temp': 0.1, 'quantize_targets': False, 'quantize_input': False, 'same_quantizer': False, 'target_glu': False, 'feature_grad_mult': 1.0, 'quantizer_depth': 1, 'quantizer_factor': 3, 'latent_vars': 320, 'latent_groups': 2, 'latent_dim': 0, 'mask_length': 3, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'require_same_masks': True, 'mask_dropout': 0.0, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_before': False, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'num_negatives': 100, 'negatives_from_everywhere': False, 'cross_sample_negatives': 0, 'codebook_negatives': 0, 'conv_pos': 32, 'conv_pos_groups': 16, 'pos_conv_depth': 1, 'latent_temp': [2.0, 0.5, 0.999995], 'max_positions': 100000, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'crop_seq_to_multiple': 1, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False, 'discrete': True, 'codebook_size': 256, 'max_update': '${optimization.max_update}', 'channels_embed_dim': 384, 'channels_pose_embed_dim': 14, 'intermediate_dim': 1024, 'mask_strategy': 'random'}, 'task': {'_name': 'audio_pretraining', 'data': '/share/data/pals/shester/sign_dinosr_logs/dataset/train_ssl_ysl25_ase_800k.csv', 'labels': None, 'binarized_dataset': False, 'sample_rate': 1, 'normalize': True, 'enable_padding': False, 'max_sample_size': 1000, 'min_sample_size': 1, 'num_batch_buckets': 0, 'precompute_mask_indices': False, 'inferred_w2v_config': None, 'kmeans_label_paths': {'face': '/scratch/shester/km_labels/ysl25/ase800/face/face_256.km', 'left_hand': '/scratch/shester/km_labels/ysl25/ase800/lhand/lhand_256.km', 'right_hand': '/scratch/shester/km_labels/ysl25/ase800/rhand/rhand_256.km', 'body_posture': '/scratch/shester/km_labels/ysl25/ase800/body/body_256.km'}, 'tpu': False, 'text_compression_level': none}, 'criterion': {'_name': 'model', 'loss_weights': {}, 'log_keys': []}, 'optimizer': {'_name': 'adam', 'adam_betas': '(0.9,0.98)', 'adam_eps': 1e-06, 'weight_decay': 0.01, 'use_old_adam': False, 'fp16_adam_stats': False, 'tpu': False, 'lr': [0.0005]}, 'lr_scheduler': {'_name': 'tri_stage', 'warmup_steps': 0, 'hold_steps': 0, 'decay_steps': 0, 'phase_ratio': [0.03, 0.47, 0.5], 'init_lr_scale': 0.01, 'final_lr_scale': 0.01, 'max_update': 80000.0, 'lr': [0.0005]}, 'scoring': None, 'bpe': None, 'tokenizer': None, 'ema': {'_name': None, 'store_ema': False, 'ema_decay': 0.9999, 'ema_start_update': 0, 'ema_seed_model': None, 'ema_update_freq': 1, 'ema_fp32': False}, 'job_logging_cfg': {'version': 1, 'formatters': {'simple': {'format': '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'}}, 'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'simple', 'stream': 'ext://sys.stdout'}, 'file': {'class': 'logging.FileHandler', 'formatter': 'simple', 'filename': 'hydra_train.log'}}, 'root': {'level': 'INFO', 'handlers': ['console', 'file']}, 'disable_existing_loggers': False}}
+[2024-10-02 23:35:00,311][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:35:00,984][fairseq_cli.train][INFO] - SignHubertModel(
+  (post_extract_proj): Linear(in_features=1024, out_features=768, bias=True)
+  (dropout_input): Dropout(p=0.0, inplace=False)
+  (dropout_features): Dropout(p=0.0, inplace=False)
+  (encoder): TransformerEncoder(
+    (pos_conv): Sequential(
+      (0): Conv1d(768, 768, kernel_size=(32,), stride=(1,), padding=(16,), groups=16)
+      (1): SamePad()
+      (2): GELU(approximate='none')
+    )
+    (layers): ModuleList(
+      (0-11): 12 x TransformerSentenceEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=768, out_features=768, bias=True)
+          (v_proj): Linear(in_features=768, out_features=768, bias=True)
+          (q_proj): Linear(in_features=768, out_features=768, bias=True)
+          (out_proj): Linear(in_features=768, out_features=768, bias=True)
+        )
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.0, inplace=False)
+        (dropout3): Dropout(p=0.1, inplace=False)
+        (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+  )
+  (layer_norm): LayerNorm((1536,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_face): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_lhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_rhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_body): LayerNorm((14,), eps=1e-05, elementwise_affine=True)
+  (heads): ModuleList(
+    (0-3): 4 x Linear(in_features=768, out_features=256, bias=True)
+  )
+  (face_proj): Linear(in_features=384, out_features=256, bias=True)
+  (left_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (right_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (body_posture_proj): Linear(in_features=14, out_features=256, bias=True)
+)
+[2024-10-02 23:35:00,986][fairseq_cli.train][INFO] - task: AudioPretrainingTask
+[2024-10-02 23:35:00,986][fairseq_cli.train][INFO] - model: SignHubertModel
+[2024-10-02 23:35:00,986][fairseq_cli.train][INFO] - criterion: ModelCriterion
+[2024-10-02 23:35:00,987][fairseq_cli.train][INFO] - num. shared model params: 88,116,284 (num. trained: 88,116,284)
+[2024-10-02 23:35:00,987][fairseq_cli.train][INFO] - num. expert model params: 0 (num. trained: 0)
+[2024-10-02 23:35:01,445][fairseq_cli.train][INFO] - {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 200, 'log_format': 'json', 'log_file': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/log.txt', 'aim_repo': None, 'aim_run_hash': None, 'tensorboard_logdir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/tb', 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': True, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'on_cpu_convert_precision': False, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'amp': False, 'amp_batch_retries': 2, 'amp_init_scale': 128, 'amp_scale_window': None, 'user_dir': '/share/data/pals/shester/sign_dinosr/fairseq/examples/dinosr', 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': None, 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 8, 'distributed_num_procs': 8, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': 'tcp://localhost:15043', 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'legacy_ddp', 'ddp_comm_hook': 'none', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'gradient_as_bucket_view': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_base_algorithm': 'localsgd', 'localsgd_frequency': 3, 'nprocs_per_node': 8, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': True, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'use_sharded_state': False, 'not_fsdp_flatten_parameters': False}, 'dataset': {'_name': None, 'num_workers': 16, 'skip_invalid_size_inputs_valid_test': True, 'max_tokens': 15000, 'batch_size': None, 'required_batch_size_multiple': 1, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'combine_valid_subsets': None, 'ignore_unused_valid_subsets': False, 'validate_interval': 5, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': True, 'max_tokens_valid': 15000, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0, 'grouped_shuffling': False, 'update_epoch_batch_itr': False, 'update_ordered_indices_seed': False}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 80000, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': False, 'update_freq': [1], 'lr': [0.0005], 'stop_min_lr': -1.0, 'use_bmuf': False, 'skip_remainder_batch': False}, 'checkpoint': {'_name': None, 'save_dir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt', 'restore_file': 'checkpoint_last.pt', 'continue_once': None, 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 20000, 'keep_interval_updates': 10, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': True, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'loss', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': True, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 8}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 0, 'input': '-'}, 'model': {'_name': 'signhubert', 'extractor_mode': layer_norm, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.0, 'dropout_features': 0.0, 'final_dim': 0, 'layer_norm_first': False, 'conv_feature_layers': '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]', 'conv_bias': False, 'logit_temp': 0.1, 'quantize_targets': False, 'quantize_input': False, 'same_quantizer': False, 'target_glu': False, 'feature_grad_mult': 1.0, 'quantizer_depth': 1, 'quantizer_factor': 3, 'latent_vars': 320, 'latent_groups': 2, 'latent_dim': 0, 'mask_length': 3, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'require_same_masks': True, 'mask_dropout': 0.0, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_before': False, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'num_negatives': 100, 'negatives_from_everywhere': False, 'cross_sample_negatives': 0, 'codebook_negatives': 0, 'conv_pos': 32, 'conv_pos_groups': 16, 'pos_conv_depth': 1, 'latent_temp': [2.0, 0.5, 0.999995], 'max_positions': 100000, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'crop_seq_to_multiple': 1, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False, 'discrete': True, 'codebook_size': 256, 'max_update': '${optimization.max_update}', 'channels_embed_dim': 384, 'channels_pose_embed_dim': 14, 'intermediate_dim': 1024, 'mask_strategy': 'random'}, 'task': {'_name': 'audio_pretraining', 'data': '/share/data/pals/shester/sign_dinosr_logs/dataset/train_ssl_ysl25_ase_800k.csv', 'labels': None, 'binarized_dataset': False, 'sample_rate': 1, 'normalize': True, 'enable_padding': False, 'max_sample_size': 1000, 'min_sample_size': 1, 'num_batch_buckets': 0, 'precompute_mask_indices': False, 'inferred_w2v_config': None, 'kmeans_label_paths': {'face': '/scratch/shester/km_labels/ysl25/ase800/face/face_256.km', 'left_hand': '/scratch/shester/km_labels/ysl25/ase800/lhand/lhand_256.km', 'right_hand': '/scratch/shester/km_labels/ysl25/ase800/rhand/rhand_256.km', 'body_posture': '/scratch/shester/km_labels/ysl25/ase800/body/body_256.km'}, 'tpu': False, 'text_compression_level': none}, 'criterion': {'_name': 'model', 'loss_weights': {}, 'log_keys': []}, 'optimizer': {'_name': 'adam', 'adam_betas': '(0.9,0.98)', 'adam_eps': 1e-06, 'weight_decay': 0.01, 'use_old_adam': False, 'fp16_adam_stats': False, 'tpu': False, 'lr': [0.0005]}, 'lr_scheduler': {'_name': 'tri_stage', 'warmup_steps': 0, 'hold_steps': 0, 'decay_steps': 0, 'phase_ratio': [0.03, 0.47, 0.5], 'init_lr_scale': 0.01, 'final_lr_scale': 0.01, 'max_update': 80000.0, 'lr': [0.0005]}, 'scoring': None, 'bpe': None, 'tokenizer': None, 'ema': {'_name': None, 'store_ema': False, 'ema_decay': 0.9999, 'ema_start_update': 0, 'ema_seed_model': None, 'ema_update_freq': 1, 'ema_fp32': False}, 'job_logging_cfg': {'version': 1, 'formatters': {'simple': {'format': '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'}}, 'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'simple', 'stream': 'ext://sys.stdout'}, 'file': {'class': 'logging.FileHandler', 'formatter': 'simple', 'filename': 'hydra_train.log'}}, 'root': {'level': 'INFO', 'handlers': ['console', 'file']}, 'disable_existing_loggers': False}}
+[2024-10-02 23:35:03,074][fairseq_cli.train][INFO] - SignHubertModel(
+  (post_extract_proj): Linear(in_features=1024, out_features=768, bias=True)
+  (dropout_input): Dropout(p=0.0, inplace=False)
+  (dropout_features): Dropout(p=0.0, inplace=False)
+  (encoder): TransformerEncoder(
+    (pos_conv): Sequential(
+      (0): Conv1d(768, 768, kernel_size=(32,), stride=(1,), padding=(16,), groups=16)
+      (1): SamePad()
+      (2): GELU(approximate='none')
+    )
+    (layers): ModuleList(
+      (0-11): 12 x TransformerSentenceEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=768, out_features=768, bias=True)
+          (v_proj): Linear(in_features=768, out_features=768, bias=True)
+          (q_proj): Linear(in_features=768, out_features=768, bias=True)
+          (out_proj): Linear(in_features=768, out_features=768, bias=True)
+        )
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.0, inplace=False)
+        (dropout3): Dropout(p=0.1, inplace=False)
+        (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+  )
+  (layer_norm): LayerNorm((1536,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_face): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_lhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_rhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_body): LayerNorm((14,), eps=1e-05, elementwise_affine=True)
+  (heads): ModuleList(
+    (0-3): 4 x Linear(in_features=768, out_features=256, bias=True)
+  )
+  (face_proj): Linear(in_features=384, out_features=256, bias=True)
+  (left_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (right_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (body_posture_proj): Linear(in_features=14, out_features=256, bias=True)
+)
+[2024-10-02 23:35:03,076][fairseq_cli.train][INFO] - task: AudioPretrainingTask
+[2024-10-02 23:35:03,076][fairseq_cli.train][INFO] - model: SignHubertModel
+[2024-10-02 23:35:03,076][fairseq_cli.train][INFO] - criterion: ModelCriterion
+[2024-10-02 23:35:03,077][fairseq_cli.train][INFO] - num. shared model params: 88,116,284 (num. trained: 88,116,284)
+[2024-10-02 23:35:03,078][fairseq_cli.train][INFO] - num. expert model params: 0 (num. trained: 0)
+[2024-10-02 23:35:03,117][fairseq_cli.train][INFO] - {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 200, 'log_format': 'json', 'log_file': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/log.txt', 'aim_repo': None, 'aim_run_hash': None, 'tensorboard_logdir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/tb', 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': True, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'on_cpu_convert_precision': False, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'amp': False, 'amp_batch_retries': 2, 'amp_init_scale': 128, 'amp_scale_window': None, 'user_dir': '/share/data/pals/shester/sign_dinosr/fairseq/examples/dinosr', 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': None, 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 8, 'distributed_num_procs': 8, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': 'tcp://localhost:10331', 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'legacy_ddp', 'ddp_comm_hook': 'none', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'gradient_as_bucket_view': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_base_algorithm': 'localsgd', 'localsgd_frequency': 3, 'nprocs_per_node': 8, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': True, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'use_sharded_state': False, 'not_fsdp_flatten_parameters': False}, 'dataset': {'_name': None, 'num_workers': 16, 'skip_invalid_size_inputs_valid_test': True, 'max_tokens': 15000, 'batch_size': None, 'required_batch_size_multiple': 1, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'combine_valid_subsets': None, 'ignore_unused_valid_subsets': False, 'validate_interval': 5, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': True, 'max_tokens_valid': 15000, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0, 'grouped_shuffling': False, 'update_epoch_batch_itr': False, 'update_ordered_indices_seed': False}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 80000, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': False, 'update_freq': [1], 'lr': [0.0005], 'stop_min_lr': -1.0, 'use_bmuf': False, 'skip_remainder_batch': False}, 'checkpoint': {'_name': None, 'save_dir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt', 'restore_file': 'checkpoint_last.pt', 'continue_once': None, 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 20000, 'keep_interval_updates': 10, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': True, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'loss', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': True, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 8}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 0, 'input': '-'}, 'model': {'_name': 'signhubert', 'extractor_mode': layer_norm, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.0, 'dropout_features': 0.0, 'final_dim': 0, 'layer_norm_first': False, 'conv_feature_layers': '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]', 'conv_bias': False, 'logit_temp': 0.1, 'quantize_targets': False, 'quantize_input': False, 'same_quantizer': False, 'target_glu': False, 'feature_grad_mult': 1.0, 'quantizer_depth': 1, 'quantizer_factor': 3, 'latent_vars': 320, 'latent_groups': 2, 'latent_dim': 0, 'mask_length': 3, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'require_same_masks': True, 'mask_dropout': 0.0, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_before': False, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'num_negatives': 100, 'negatives_from_everywhere': False, 'cross_sample_negatives': 0, 'codebook_negatives': 0, 'conv_pos': 32, 'conv_pos_groups': 16, 'pos_conv_depth': 1, 'latent_temp': [2.0, 0.5, 0.999995], 'max_positions': 100000, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'crop_seq_to_multiple': 1, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False, 'discrete': True, 'codebook_size': 256, 'max_update': '${optimization.max_update}', 'channels_embed_dim': 384, 'channels_pose_embed_dim': 14, 'intermediate_dim': 1024, 'mask_strategy': 'random'}, 'task': {'_name': 'audio_pretraining', 'data': '/share/data/pals/shester/sign_dinosr_logs/dataset/train_ssl_ysl25_ase_800k.csv', 'labels': None, 'binarized_dataset': False, 'sample_rate': 1, 'normalize': True, 'enable_padding': False, 'max_sample_size': 1000, 'min_sample_size': 1, 'num_batch_buckets': 0, 'precompute_mask_indices': False, 'inferred_w2v_config': None, 'kmeans_label_paths': {'face': '/scratch/shester/km_labels/ysl25/ase800/face/face_256.km', 'left_hand': '/scratch/shester/km_labels/ysl25/ase800/lhand/lhand_256.km', 'right_hand': '/scratch/shester/km_labels/ysl25/ase800/rhand/rhand_256.km', 'body_posture': '/scratch/shester/km_labels/ysl25/ase800/body/body_256.km'}, 'tpu': False, 'text_compression_level': none}, 'criterion': {'_name': 'model', 'loss_weights': {}, 'log_keys': []}, 'optimizer': {'_name': 'adam', 'adam_betas': '(0.9,0.98)', 'adam_eps': 1e-06, 'weight_decay': 0.01, 'use_old_adam': False, 'fp16_adam_stats': False, 'tpu': False, 'lr': [0.0005]}, 'lr_scheduler': {'_name': 'tri_stage', 'warmup_steps': 0, 'hold_steps': 0, 'decay_steps': 0, 'phase_ratio': [0.03, 0.47, 0.5], 'init_lr_scale': 0.01, 'final_lr_scale': 0.01, 'max_update': 80000.0, 'lr': [0.0005]}, 'scoring': None, 'bpe': None, 'tokenizer': None, 'ema': {'_name': None, 'store_ema': False, 'ema_decay': 0.9999, 'ema_start_update': 0, 'ema_seed_model': None, 'ema_update_freq': 1, 'ema_fp32': False}, 'job_logging_cfg': {'version': 1, 'formatters': {'simple': {'format': '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'}}, 'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'simple', 'stream': 'ext://sys.stdout'}, 'file': {'class': 'logging.FileHandler', 'formatter': 'simple', 'filename': 'hydra_train.log'}}, 'root': {'level': 'INFO', 'handlers': ['console', 'file']}, 'disable_existing_loggers': False}}
+[2024-10-02 23:35:03,545][fairseq_cli.train][INFO] - {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 200, 'log_format': 'json', 'log_file': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/log.txt', 'aim_repo': None, 'aim_run_hash': None, 'tensorboard_logdir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/tb', 'wandb_project': None, 'azureml_logging': False, 'seed': 1, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': True, 'memory_efficient_fp16': False, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'on_cpu_convert_precision': False, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'amp': False, 'amp_batch_retries': 2, 'amp_init_scale': 128, 'amp_scale_window': None, 'user_dir': '/share/data/pals/shester/sign_dinosr/fairseq/examples/dinosr', 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': None, 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 8, 'distributed_num_procs': 8, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': 'tcp://localhost:18759', 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'legacy_ddp', 'ddp_comm_hook': 'none', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'gradient_as_bucket_view': False, 'fast_stat_sync': False, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_base_algorithm': 'localsgd', 'localsgd_frequency': 3, 'nprocs_per_node': 8, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': True, 'memory_efficient_fp16': False, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'use_sharded_state': False, 'not_fsdp_flatten_parameters': False}, 'dataset': {'_name': None, 'num_workers': 16, 'skip_invalid_size_inputs_valid_test': True, 'max_tokens': 15000, 'batch_size': None, 'required_batch_size_multiple': 1, 'required_seq_len_multiple': 1, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'combine_valid_subsets': None, 'ignore_unused_valid_subsets': False, 'validate_interval': 5, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': True, 'max_tokens_valid': 15000, 'batch_size_valid': None, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0, 'grouped_shuffling': False, 'update_epoch_batch_itr': False, 'update_ordered_indices_seed': False}, 'optimization': {'_name': None, 'max_epoch': 0, 'max_update': 80000, 'stop_time_hours': 0.0, 'clip_norm': 0.0, 'sentence_avg': False, 'update_freq': [1], 'lr': [0.0005], 'stop_min_lr': -1.0, 'use_bmuf': False, 'skip_remainder_batch': False}, 'checkpoint': {'_name': None, 'save_dir': '/share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt', 'restore_file': 'checkpoint_last.pt', 'continue_once': None, 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 20000, 'keep_interval_updates': 10, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': True, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'loss', 'maximize_best_checkpoint_metric': False, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': True, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 8}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 0, 'input': '-'}, 'model': {'_name': 'signhubert', 'extractor_mode': layer_norm, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.0, 'dropout_features': 0.0, 'final_dim': 0, 'layer_norm_first': False, 'conv_feature_layers': '[(512, 10, 5)] + [(512, 3, 2)] * 4 + [(512,2,2)] + [(512,2,2)]', 'conv_bias': False, 'logit_temp': 0.1, 'quantize_targets': False, 'quantize_input': False, 'same_quantizer': False, 'target_glu': False, 'feature_grad_mult': 1.0, 'quantizer_depth': 1, 'quantizer_factor': 3, 'latent_vars': 320, 'latent_groups': 2, 'latent_dim': 0, 'mask_length': 3, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'require_same_masks': True, 'mask_dropout': 0.0, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_before': False, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'num_negatives': 100, 'negatives_from_everywhere': False, 'cross_sample_negatives': 0, 'codebook_negatives': 0, 'conv_pos': 32, 'conv_pos_groups': 16, 'pos_conv_depth': 1, 'latent_temp': [2.0, 0.5, 0.999995], 'max_positions': 100000, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'crop_seq_to_multiple': 1, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False, 'discrete': True, 'codebook_size': 256, 'max_update': '${optimization.max_update}', 'channels_embed_dim': 384, 'channels_pose_embed_dim': 14, 'intermediate_dim': 1024, 'mask_strategy': 'random'}, 'task': {'_name': 'audio_pretraining', 'data': '/share/data/pals/shester/sign_dinosr_logs/dataset/train_ssl_ysl25_ase_800k.csv', 'labels': None, 'binarized_dataset': False, 'sample_rate': 1, 'normalize': True, 'enable_padding': False, 'max_sample_size': 1000, 'min_sample_size': 1, 'num_batch_buckets': 0, 'precompute_mask_indices': False, 'inferred_w2v_config': None, 'kmeans_label_paths': {'face': '/scratch/shester/km_labels/ysl25/ase800/face/face_256.km', 'left_hand': '/scratch/shester/km_labels/ysl25/ase800/lhand/lhand_256.km', 'right_hand': '/scratch/shester/km_labels/ysl25/ase800/rhand/rhand_256.km', 'body_posture': '/scratch/shester/km_labels/ysl25/ase800/body/body_256.km'}, 'tpu': False, 'text_compression_level': none}, 'criterion': {'_name': 'model', 'loss_weights': {}, 'log_keys': []}, 'optimizer': {'_name': 'adam', 'adam_betas': '(0.9,0.98)', 'adam_eps': 1e-06, 'weight_decay': 0.01, 'use_old_adam': False, 'fp16_adam_stats': False, 'tpu': False, 'lr': [0.0005]}, 'lr_scheduler': {'_name': 'tri_stage', 'warmup_steps': 0, 'hold_steps': 0, 'decay_steps': 0, 'phase_ratio': [0.03, 0.47, 0.5], 'init_lr_scale': 0.01, 'final_lr_scale': 0.01, 'max_update': 80000.0, 'lr': [0.0005]}, 'scoring': None, 'bpe': None, 'tokenizer': None, 'ema': {'_name': None, 'store_ema': False, 'ema_decay': 0.9999, 'ema_start_update': 0, 'ema_seed_model': None, 'ema_update_freq': 1, 'ema_fp32': False}, 'job_logging_cfg': {'version': 1, 'formatters': {'simple': {'format': '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'}}, 'handlers': {'console': {'class': 'logging.StreamHandler', 'formatter': 'simple', 'stream': 'ext://sys.stdout'}, 'file': {'class': 'logging.FileHandler', 'formatter': 'simple', 'filename': 'hydra_train.log'}}, 'root': {'level': 'INFO', 'handlers': ['console', 'file']}, 'disable_existing_loggers': False}}
+[2024-10-02 23:35:04,082][fairseq_cli.train][INFO] - SignHubertModel(
+  (post_extract_proj): Linear(in_features=1024, out_features=768, bias=True)
+  (dropout_input): Dropout(p=0.0, inplace=False)
+  (dropout_features): Dropout(p=0.0, inplace=False)
+  (encoder): TransformerEncoder(
+    (pos_conv): Sequential(
+      (0): Conv1d(768, 768, kernel_size=(32,), stride=(1,), padding=(16,), groups=16)
+      (1): SamePad()
+      (2): GELU(approximate='none')
+    )
+    (layers): ModuleList(
+      (0-11): 12 x TransformerSentenceEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=768, out_features=768, bias=True)
+          (v_proj): Linear(in_features=768, out_features=768, bias=True)
+          (q_proj): Linear(in_features=768, out_features=768, bias=True)
+          (out_proj): Linear(in_features=768, out_features=768, bias=True)
+        )
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.0, inplace=False)
+        (dropout3): Dropout(p=0.1, inplace=False)
+        (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+  )
+  (layer_norm): LayerNorm((1536,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_face): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_lhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_rhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_body): LayerNorm((14,), eps=1e-05, elementwise_affine=True)
+  (heads): ModuleList(
+    (0-3): 4 x Linear(in_features=768, out_features=256, bias=True)
+  )
+  (face_proj): Linear(in_features=384, out_features=256, bias=True)
+  (left_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (right_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (body_posture_proj): Linear(in_features=14, out_features=256, bias=True)
+)
+[2024-10-02 23:35:04,084][fairseq_cli.train][INFO] - task: AudioPretrainingTask
+[2024-10-02 23:35:04,085][fairseq_cli.train][INFO] - model: SignHubertModel
+[2024-10-02 23:35:04,085][fairseq_cli.train][INFO] - criterion: ModelCriterion
+[2024-10-02 23:35:04,085][fairseq_cli.train][INFO] - num. shared model params: 88,116,284 (num. trained: 88,116,284)
+[2024-10-02 23:35:04,086][fairseq_cli.train][INFO] - num. expert model params: 0 (num. trained: 0)
+[2024-10-02 23:35:06,915][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:35:08,957][fairseq_cli.train][INFO] - SignHubertModel(
+  (post_extract_proj): Linear(in_features=1024, out_features=768, bias=True)
+  (dropout_input): Dropout(p=0.0, inplace=False)
+  (dropout_features): Dropout(p=0.0, inplace=False)
+  (encoder): TransformerEncoder(
+    (pos_conv): Sequential(
+      (0): Conv1d(768, 768, kernel_size=(32,), stride=(1,), padding=(16,), groups=16)
+      (1): SamePad()
+      (2): GELU(approximate='none')
+    )
+    (layers): ModuleList(
+      (0-11): 12 x TransformerSentenceEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=768, out_features=768, bias=True)
+          (v_proj): Linear(in_features=768, out_features=768, bias=True)
+          (q_proj): Linear(in_features=768, out_features=768, bias=True)
+          (out_proj): Linear(in_features=768, out_features=768, bias=True)
+        )
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.0, inplace=False)
+        (dropout3): Dropout(p=0.1, inplace=False)
+        (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+  )
+  (layer_norm): LayerNorm((1536,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_face): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_lhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_rhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_body): LayerNorm((14,), eps=1e-05, elementwise_affine=True)
+  (heads): ModuleList(
+    (0-3): 4 x Linear(in_features=768, out_features=256, bias=True)
+  )
+  (face_proj): Linear(in_features=384, out_features=256, bias=True)
+  (left_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (right_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (body_posture_proj): Linear(in_features=14, out_features=256, bias=True)
+)
+[2024-10-02 23:35:08,970][fairseq_cli.train][INFO] - task: AudioPretrainingTask
+[2024-10-02 23:35:08,970][fairseq_cli.train][INFO] - model: SignHubertModel
+[2024-10-02 23:35:08,970][fairseq_cli.train][INFO] - criterion: ModelCriterion
+[2024-10-02 23:35:08,971][fairseq_cli.train][INFO] - num. shared model params: 88,116,284 (num. trained: 88,116,284)
+[2024-10-02 23:35:08,972][fairseq_cli.train][INFO] - num. expert model params: 0 (num. trained: 0)
+[2024-10-02 23:35:17,457][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:35:21,175][fairseq_cli.train][INFO] - SignHubertModel(
+  (post_extract_proj): Linear(in_features=1024, out_features=768, bias=True)
+  (dropout_input): Dropout(p=0.0, inplace=False)
+  (dropout_features): Dropout(p=0.0, inplace=False)
+  (encoder): TransformerEncoder(
+    (pos_conv): Sequential(
+      (0): Conv1d(768, 768, kernel_size=(32,), stride=(1,), padding=(16,), groups=16)
+      (1): SamePad()
+      (2): GELU(approximate='none')
+    )
+    (layers): ModuleList(
+      (0-11): 12 x TransformerSentenceEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=768, out_features=768, bias=True)
+          (v_proj): Linear(in_features=768, out_features=768, bias=True)
+          (q_proj): Linear(in_features=768, out_features=768, bias=True)
+          (out_proj): Linear(in_features=768, out_features=768, bias=True)
+        )
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.0, inplace=False)
+        (dropout3): Dropout(p=0.1, inplace=False)
+        (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+  )
+  (layer_norm): LayerNorm((1536,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_face): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_lhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_rhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_body): LayerNorm((14,), eps=1e-05, elementwise_affine=True)
+  (heads): ModuleList(
+    (0-3): 4 x Linear(in_features=768, out_features=256, bias=True)
+  )
+  (face_proj): Linear(in_features=384, out_features=256, bias=True)
+  (left_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (right_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (body_posture_proj): Linear(in_features=14, out_features=256, bias=True)
+)
+[2024-10-02 23:35:21,178][fairseq_cli.train][INFO] - task: AudioPretrainingTask
+[2024-10-02 23:35:21,178][fairseq_cli.train][INFO] - model: SignHubertModel
+[2024-10-02 23:35:21,178][fairseq_cli.train][INFO] - criterion: ModelCriterion
+[2024-10-02 23:35:21,179][fairseq_cli.train][INFO] - num. shared model params: 88,116,284 (num. trained: 88,116,284)
+[2024-10-02 23:35:21,180][fairseq_cli.train][INFO] - num. expert model params: 0 (num. trained: 0)
+[2024-10-02 23:35:22,126][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:35:24,457][fairseq_cli.train][INFO] - SignHubertModel(
+  (post_extract_proj): Linear(in_features=1024, out_features=768, bias=True)
+  (dropout_input): Dropout(p=0.0, inplace=False)
+  (dropout_features): Dropout(p=0.0, inplace=False)
+  (encoder): TransformerEncoder(
+    (pos_conv): Sequential(
+      (0): Conv1d(768, 768, kernel_size=(32,), stride=(1,), padding=(16,), groups=16)
+      (1): SamePad()
+      (2): GELU(approximate='none')
+    )
+    (layers): ModuleList(
+      (0-11): 12 x TransformerSentenceEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=768, out_features=768, bias=True)
+          (v_proj): Linear(in_features=768, out_features=768, bias=True)
+          (q_proj): Linear(in_features=768, out_features=768, bias=True)
+          (out_proj): Linear(in_features=768, out_features=768, bias=True)
+        )
+        (dropout1): Dropout(p=0.1, inplace=False)
+        (dropout2): Dropout(p=0.0, inplace=False)
+        (dropout3): Dropout(p=0.1, inplace=False)
+        (self_attn_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (final_layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (layer_norm): LayerNorm((768,), eps=1e-05, elementwise_affine=True)
+  )
+  (layer_norm): LayerNorm((1536,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_face): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_lhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_rhand): LayerNorm((384,), eps=1e-05, elementwise_affine=True)
+  (layer_norm_body): LayerNorm((14,), eps=1e-05, elementwise_affine=True)
+  (heads): ModuleList(
+    (0-3): 4 x Linear(in_features=768, out_features=256, bias=True)
+  )
+  (face_proj): Linear(in_features=384, out_features=256, bias=True)
+  (left_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (right_hand_proj): Linear(in_features=384, out_features=256, bias=True)
+  (body_posture_proj): Linear(in_features=14, out_features=256, bias=True)
+)
+[2024-10-02 23:35:24,543][fairseq_cli.train][INFO] - task: AudioPretrainingTask
+[2024-10-02 23:35:24,543][fairseq_cli.train][INFO] - model: SignHubertModel
+[2024-10-02 23:35:24,543][fairseq_cli.train][INFO] - criterion: ModelCriterion
+[2024-10-02 23:35:24,544][fairseq_cli.train][INFO] - num. shared model params: 88,116,284 (num. trained: 88,116,284)
+[2024-10-02 23:35:24,544][fairseq_cli.train][INFO] - num. expert model params: 0 (num. trained: 0)
+[2024-10-02 23:35:36,286][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:36:04,801][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:36:12,960][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:37:41,201][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:37:41,201][fairseq.utils][INFO] - rank   0: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:37:41,201][fairseq.utils][INFO] - rank   1: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:37:41,201][fairseq.utils][INFO] - rank   2: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:37:41,201][fairseq.utils][INFO] - rank   3: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:37:41,202][fairseq.utils][INFO] - rank   4: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:37:41,202][fairseq.utils][INFO] - rank   5: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:37:41,202][fairseq.utils][INFO] - rank   6: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:37:41,202][fairseq.utils][INFO] - rank   7: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:37:41,202][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:37:41,202][fairseq_cli.train][INFO] - training on 8 devices (GPUs/TPUs)
+[2024-10-02 23:37:41,203][fairseq_cli.train][INFO] - max tokens per device = 15000 and max sentences per device = None
+[2024-10-02 23:37:41,204][fairseq.trainer][INFO] - Preparing to load checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:37:41,204][fairseq.trainer][INFO] - No existing checkpoint found /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:37:41,204][fairseq.trainer][INFO] - loading train data for epoch 1
+[2024-10-02 23:37:49,955][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:38:59,696][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-02 23:38:59,702][fairseq.trainer][INFO] - begin training epoch 1
+[2024-10-02 23:38:59,702][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-02 23:40:26,395][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:40:26,428][fairseq.utils][INFO] - rank   0: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:40:26,428][fairseq.utils][INFO] - rank   1: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:40:26,428][fairseq.utils][INFO] - rank   2: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:40:26,428][fairseq.utils][INFO] - rank   3: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:40:26,428][fairseq.utils][INFO] - rank   4: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:40:26,428][fairseq.utils][INFO] - rank   5: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:40:26,428][fairseq.utils][INFO] - rank   6: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:40:26,428][fairseq.utils][INFO] - rank   7: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:40:26,428][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:40:26,429][fairseq_cli.train][INFO] - training on 8 devices (GPUs/TPUs)
+[2024-10-02 23:40:26,434][fairseq_cli.train][INFO] - max tokens per device = 15000 and max sentences per device = None
+[2024-10-02 23:40:26,434][fairseq.trainer][INFO] - Preparing to load checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:40:26,435][fairseq.trainer][INFO] - No existing checkpoint found /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:40:26,435][fairseq.trainer][INFO] - loading train data for epoch 1
+[2024-10-02 23:40:55,444][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:44:50,976][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:44:51,015][fairseq.utils][INFO] - rank   0: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:44:51,015][fairseq.utils][INFO] - rank   1: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:44:51,015][fairseq.utils][INFO] - rank   2: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:44:51,015][fairseq.utils][INFO] - rank   3: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:44:51,015][fairseq.utils][INFO] - rank   4: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:44:51,015][fairseq.utils][INFO] - rank   5: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:44:51,015][fairseq.utils][INFO] - rank   6: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:44:51,015][fairseq.utils][INFO] - rank   7: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:44:51,015][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:44:51,016][fairseq_cli.train][INFO] - training on 8 devices (GPUs/TPUs)
+[2024-10-02 23:44:51,077][fairseq_cli.train][INFO] - max tokens per device = 15000 and max sentences per device = None
+[2024-10-02 23:44:51,079][fairseq.trainer][INFO] - Preparing to load checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:44:51,079][fairseq.trainer][INFO] - No existing checkpoint found /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:44:51,079][fairseq.trainer][INFO] - loading train data for epoch 1
+[2024-10-02 23:45:25,300][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:46:39,762][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:46:39,764][fairseq.utils][INFO] - rank   0: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:46:39,764][fairseq.utils][INFO] - rank   1: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:46:39,764][fairseq.utils][INFO] - rank   2: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:46:39,764][fairseq.utils][INFO] - rank   3: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:46:39,764][fairseq.utils][INFO] - rank   4: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:46:39,764][fairseq.utils][INFO] - rank   5: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:46:39,764][fairseq.utils][INFO] - rank   6: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:46:39,764][fairseq.utils][INFO] - rank   7: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:46:39,764][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:46:39,764][fairseq_cli.train][INFO] - training on 8 devices (GPUs/TPUs)
+[2024-10-02 23:46:39,765][fairseq_cli.train][INFO] - max tokens per device = 15000 and max sentences per device = None
+[2024-10-02 23:46:39,766][fairseq.trainer][INFO] - Preparing to load checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:46:39,766][fairseq.trainer][INFO] - No existing checkpoint found /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:46:39,766][fairseq.trainer][INFO] - loading train data for epoch 1
+[2024-10-02 23:46:42,879][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:47:30,827][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-02 23:47:30,832][fairseq.trainer][INFO] - begin training epoch 1
+[2024-10-02 23:47:30,832][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-02 23:47:59,739][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:47:59,740][fairseq.utils][INFO] - rank   0: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:47:59,740][fairseq.utils][INFO] - rank   1: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:47:59,740][fairseq.utils][INFO] - rank   2: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:47:59,740][fairseq.utils][INFO] - rank   3: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:47:59,740][fairseq.utils][INFO] - rank   4: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:47:59,740][fairseq.utils][INFO] - rank   5: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:47:59,740][fairseq.utils][INFO] - rank   6: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:47:59,740][fairseq.utils][INFO] - rank   7: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:47:59,740][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:47:59,741][fairseq_cli.train][INFO] - training on 8 devices (GPUs/TPUs)
+[2024-10-02 23:47:59,741][fairseq_cli.train][INFO] - max tokens per device = 15000 and max sentences per device = None
+[2024-10-02 23:47:59,742][fairseq.trainer][INFO] - Preparing to load checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:47:59,742][fairseq.trainer][INFO] - No existing checkpoint found /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:47:59,742][fairseq.trainer][INFO] - loading train data for epoch 1
+[2024-10-02 23:48:03,296][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:48:05,243][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:48:05,243][fairseq.utils][INFO] - rank   0: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:05,243][fairseq.utils][INFO] - rank   1: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:05,243][fairseq.utils][INFO] - rank   2: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:05,243][fairseq.utils][INFO] - rank   3: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:05,243][fairseq.utils][INFO] - rank   4: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:05,244][fairseq.utils][INFO] - rank   5: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:05,244][fairseq.utils][INFO] - rank   6: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:05,244][fairseq.utils][INFO] - rank   7: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:05,244][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:48:05,244][fairseq_cli.train][INFO] - training on 8 devices (GPUs/TPUs)
+[2024-10-02 23:48:05,244][fairseq_cli.train][INFO] - max tokens per device = 15000 and max sentences per device = None
+[2024-10-02 23:48:05,258][fairseq.trainer][INFO] - Preparing to load checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:48:05,258][fairseq.trainer][INFO] - No existing checkpoint found /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:48:05,258][fairseq.trainer][INFO] - loading train data for epoch 1
+[2024-10-02 23:48:09,262][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:48:09,263][fairseq.utils][INFO] - rank   0: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:09,263][fairseq.utils][INFO] - rank   1: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:09,270][fairseq.utils][INFO] - rank   2: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:09,270][fairseq.utils][INFO] - rank   3: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:09,270][fairseq.utils][INFO] - rank   4: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:09,270][fairseq.utils][INFO] - rank   5: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:09,270][fairseq.utils][INFO] - rank   6: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:09,270][fairseq.utils][INFO] - rank   7: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:09,270][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:48:09,270][fairseq_cli.train][INFO] - training on 8 devices (GPUs/TPUs)
+[2024-10-02 23:48:09,270][fairseq_cli.train][INFO] - max tokens per device = 15000 and max sentences per device = None
+[2024-10-02 23:48:09,278][fairseq.trainer][INFO] - Preparing to load checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:48:09,282][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:48:09,282][fairseq.trainer][INFO] - No existing checkpoint found /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:48:09,282][fairseq.trainer][INFO] - loading train data for epoch 1
+[2024-10-02 23:48:15,955][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:48:16,987][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-02 23:48:17,011][fairseq.trainer][INFO] - begin training epoch 1
+[2024-10-02 23:48:17,024][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-02 23:48:22,378][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:48:22,397][fairseq.utils][INFO] - rank   0: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:22,398][fairseq.utils][INFO] - rank   1: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:22,398][fairseq.utils][INFO] - rank   2: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:22,398][fairseq.utils][INFO] - rank   3: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:22,398][fairseq.utils][INFO] - rank   4: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:22,398][fairseq.utils][INFO] - rank   5: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:22,398][fairseq.utils][INFO] - rank   6: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:22,398][fairseq.utils][INFO] - rank   7: capabilities =  8.9  ; total memory = 47.500 GB ; name = NVIDIA RTX 6000 Ada Generation          
+[2024-10-02 23:48:22,398][fairseq.utils][INFO] - ***********************CUDA enviroments for all 8 workers***********************
+[2024-10-02 23:48:22,398][fairseq_cli.train][INFO] - training on 8 devices (GPUs/TPUs)
+[2024-10-02 23:48:22,399][fairseq_cli.train][INFO] - max tokens per device = 15000 and max sentences per device = None
+[2024-10-02 23:48:22,400][fairseq.trainer][INFO] - Preparing to load checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:48:22,406][fairseq.trainer][INFO] - No existing checkpoint found /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-02 23:48:22,406][fairseq.trainer][INFO] - loading train data for epoch 1
+[2024-10-02 23:48:26,778][fairseq.data.audio.raw_audio_dataset][INFO] - loaded 840029, skipped 0 samples
+[2024-10-02 23:48:39,869][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-02 23:48:39,895][fairseq.trainer][INFO] - begin training epoch 1
+[2024-10-02 23:48:39,896][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-02 23:49:31,816][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-02 23:49:31,823][fairseq.trainer][INFO] - begin training epoch 1
+[2024-10-02 23:49:31,823][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-02 23:49:40,419][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-02 23:49:40,427][fairseq.trainer][INFO] - begin training epoch 1
+[2024-10-02 23:49:40,427][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-02 23:49:44,543][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-02 23:49:44,551][fairseq.trainer][INFO] - begin training epoch 1
+[2024-10-02 23:49:44,551][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-02 23:49:48,492][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-02 23:49:48,499][fairseq.trainer][INFO] - begin training epoch 1
+[2024-10-02 23:49:48,499][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 00:11:24,784][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 64.0
+[2024-10-03 00:11:46,120][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 32.0
+[2024-10-03 00:11:47,334][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 16.0
+[2024-10-03 00:11:56,768][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 8.0
+[2024-10-03 00:12:41,860][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 64.0
+[2024-10-03 00:13:01,071][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 32.0
+[2024-10-03 00:13:35,737][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 16.0
+[2024-10-03 00:13:36,950][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 8.0
+[2024-10-03 00:13:46,056][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 4.0
+[2024-10-03 00:21:33,640][train_inner][INFO] - {"epoch": 1, "update": 0.861, "loss": "4.545", "ntokens": "523948", "nsentences": "3504.45", "wps": "219630", "ups": "0.42", "wpb": "523948", "bsz": "3504.5", "num_updates": "200", "lr": "4.625e-05", "gnorm": "0.665", "loss_scale": "4", "train_wall": "353", "gb_free": "33.3", "wall": "1991"}
+[2024-10-03 00:22:45,866][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 1 @ 233 updates
+[2024-10-03 00:22:45,867][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 00:22:51,223][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 00:22:52,415][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 1 @ 233 updates, score None) (writing took 6.549298334866762 seconds)
+[2024-10-03 00:22:52,415][fairseq_cli.train][INFO] - end of epoch 1 (average epoch stats below)
+[2024-10-03 00:22:52,561][train][INFO] - {"epoch": 1, "train_loss": "4.393", "train_ntokens": "521736", "train_nsentences": "3525.82", "train_wps": "218438", "train_ups": "0.42", "train_wpb": "521736", "train_bsz": "3525.8", "train_num_updates": "233", "train_lr": "5.30562e-05", "train_gnorm": "0.732", "train_loss_scale": "4", "train_train_wall": "396", "train_gb_free": "34.2", "train_wall": "2070"}
+[2024-10-03 00:22:52,873][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 00:22:52,920][fairseq.trainer][INFO] - begin training epoch 2
+[2024-10-03 00:22:52,921][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 00:36:20,774][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 2.0
+[2024-10-03 00:37:33,178][train_inner][INFO] - {"epoch": 2, "update": 1.706, "loss": "2.951", "ntokens": "521183", "nsentences": "3555.61", "wps": "108682", "ups": "0.21", "wpb": "521183", "bsz": "3555.6", "num_updates": "400", "lr": "8.75e-05", "gnorm": "2.023", "loss_scale": "2", "train_wall": "509", "gb_free": "33.3", "wall": "2950"}
+[2024-10-03 00:39:52,106][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 2 @ 470 updates
+[2024-10-03 00:39:52,110][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 00:40:08,911][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 00:40:09,015][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 2 @ 470 updates, score None) (writing took 16.909073617309332 seconds)
+[2024-10-03 00:40:09,016][fairseq_cli.train][INFO] - end of epoch 2 (average epoch stats below)
+[2024-10-03 00:40:09,046][train][INFO] - {"epoch": 2, "train_loss": "2.702", "train_ntokens": "521392", "train_nsentences": "3533.4", "train_wps": "119224", "train_ups": "0.23", "train_wpb": "521392", "train_bsz": "3533.4", "train_num_updates": "470", "train_lr": "0.000101938", "train_gnorm": "2.318", "train_loss_scale": "2", "train_train_wall": "601", "train_gb_free": "33.3", "train_wall": "3107"}
+[2024-10-03 00:40:09,138][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 00:40:09,237][fairseq.trainer][INFO] - begin training epoch 3
+[2024-10-03 00:40:09,238][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 00:49:35,288][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 1.0
+[2024-10-03 00:53:37,094][train_inner][INFO] - {"epoch": 3, "update": 2.55, "loss": "2.144", "ntokens": "520838", "nsentences": "3527.49", "wps": "108072", "ups": "0.21", "wpb": "520838", "bsz": "3527.5", "num_updates": "600", "lr": "0.00012875", "gnorm": "2.547", "loss_scale": "1", "train_wall": "551", "gb_free": "33.3", "wall": "3915"}
+[2024-10-03 00:58:08,861][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 3 @ 707 updates
+[2024-10-03 00:58:08,881][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 00:58:17,238][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 00:58:17,428][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 3 @ 707 updates, score None) (writing took 8.566619836725295 seconds)
+[2024-10-03 00:58:17,442][fairseq_cli.train][INFO] - end of epoch 3 (average epoch stats below)
+[2024-10-03 00:58:17,578][train][INFO] - {"epoch": 3, "train_loss": "1.946", "train_ntokens": "521599", "train_nsentences": "3535.89", "train_wps": "113579", "train_ups": "0.22", "train_wpb": "521599", "train_bsz": "3535.9", "train_num_updates": "707", "train_lr": "0.000150819", "train_gnorm": "2.507", "train_loss_scale": "1", "train_train_wall": "684", "train_gb_free": "35.2", "train_wall": "4195"}
+[2024-10-03 00:58:17,750][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 00:58:17,872][fairseq.trainer][INFO] - begin training epoch 4
+[2024-10-03 00:58:17,872][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 01:08:54,638][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 0.5
+[2024-10-03 01:09:36,960][train_inner][INFO] - {"epoch": 4, "update": 3.395, "loss": "1.759", "ntokens": "521083", "nsentences": "3558.16", "wps": "108588", "ups": "0.21", "wpb": "521083", "bsz": "3558.2", "num_updates": "800", "lr": "0.00017", "gnorm": "2.368", "loss_scale": "0.5", "train_wall": "549", "gb_free": "34.2", "wall": "4874"}
+[2024-10-03 01:16:18,872][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 4 @ 944 updates
+[2024-10-03 01:16:18,874][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 01:16:23,657][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 01:16:23,659][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 4 @ 944 updates, score None) (writing took 4.787534035742283 seconds)
+[2024-10-03 01:16:23,660][fairseq_cli.train][INFO] - end of epoch 4 (average epoch stats below)
+[2024-10-03 01:16:23,662][train][INFO] - {"epoch": 4, "train_loss": "1.624", "train_ntokens": "521800", "train_nsentences": "3532.08", "train_wps": "113865", "train_ups": "0.22", "train_wpb": "521800", "train_bsz": "3532.1", "train_num_updates": "944", "train_lr": "0.0001997", "train_gnorm": "2.208", "train_loss_scale": "0.5", "train_train_wall": "678", "train_gb_free": "33.3", "train_wall": "5281"}
+[2024-10-03 01:16:23,823][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 01:16:23,829][fairseq.trainer][INFO] - begin training epoch 5
+[2024-10-03 01:16:23,829][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 01:25:34,878][train_inner][INFO] - {"epoch": 5, "update": 4.235, "loss": "1.566", "ntokens": "521253", "nsentences": "3546.09", "wps": "108831", "ups": "0.21", "wpb": "521253", "bsz": "3546.1", "num_updates": "1000", "lr": "0.00021125", "gnorm": "2.137", "loss_scale": "0.5", "train_wall": "567", "gb_free": "33.3", "wall": "5832"}
+[2024-10-03 01:33:32,065][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 5 @ 1182 updates
+[2024-10-03 01:33:32,067][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 01:33:36,814][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 01:33:36,818][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 5 @ 1182 updates, score None) (writing took 4.752725721336901 seconds)
+[2024-10-03 01:33:36,819][fairseq_cli.train][INFO] - end of epoch 5 (average epoch stats below)
+[2024-10-03 01:33:36,834][train][INFO] - {"epoch": 5, "train_loss": "1.468", "train_ntokens": "521907", "train_nsentences": "3529.53", "train_wps": "120228", "train_ups": "0.23", "train_wpb": "521907", "train_bsz": "3529.5", "train_num_updates": "1182", "train_lr": "0.000248787", "train_gnorm": "1.881", "train_loss_scale": "0.5", "train_train_wall": "640", "train_gb_free": "34.3", "train_wall": "6314"}
+[2024-10-03 01:33:36,928][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 01:33:37,046][fairseq.trainer][INFO] - begin training epoch 6
+[2024-10-03 01:33:37,046][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 01:40:44,559][train_inner][INFO] - {"epoch": 6, "update": 5.076, "loss": "1.451", "ntokens": "521860", "nsentences": "3511.13", "wps": "114735", "ups": "0.22", "wpb": "521860", "bsz": "3511.1", "num_updates": "1200", "lr": "0.0002525", "gnorm": "1.857", "loss_scale": "0.5", "train_wall": "564", "gb_free": "33.3", "wall": "6742"}
+[2024-10-03 01:50:21,183][train_inner][INFO] - {"epoch": 6, "update": 5.916, "loss": "1.378", "ntokens": "523422", "nsentences": "3553.2", "wps": "181549", "ups": "0.35", "wpb": "523422", "bsz": "3553.2", "num_updates": "1400", "lr": "0.00029375", "gnorm": "1.734", "loss_scale": "0.5", "train_wall": "571", "gb_free": "33.3", "wall": "7319"}
+[2024-10-03 01:51:55,433][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 6 @ 1420 updates
+[2024-10-03 01:51:55,435][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 01:51:59,251][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 01:51:59,256][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 6 @ 1420 updates, score None) (writing took 3.822909604758024 seconds)
+[2024-10-03 01:51:59,257][fairseq_cli.train][INFO] - end of epoch 6 (average epoch stats below)
+[2024-10-03 01:51:59,259][train][INFO] - {"epoch": 6, "train_loss": "1.379", "train_ntokens": "521644", "train_nsentences": "3529.53", "train_wps": "112617", "train_ups": "0.22", "train_wpb": "521644", "train_bsz": "3529.5", "train_num_updates": "1420", "train_lr": "0.000297875", "train_gnorm": "1.732", "train_loss_scale": "0.5", "train_train_wall": "759", "train_gb_free": "33.4", "train_wall": "7417"}
+[2024-10-03 01:51:59,330][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 01:51:59,383][fairseq.trainer][INFO] - begin training epoch 7
+[2024-10-03 01:51:59,383][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 02:07:42,119][train_inner][INFO] - {"epoch": 7, "update": 6.756, "loss": "1.324", "ntokens": "521136", "nsentences": "3537.94", "wps": "100137", "ups": "0.19", "wpb": "521136", "bsz": "3537.9", "num_updates": "1600", "lr": "0.000335", "gnorm": "1.611", "loss_scale": "0.5", "train_wall": "695", "gb_free": "35.2", "wall": "8360"}
+[2024-10-03 02:10:09,760][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 7 @ 1658 updates
+[2024-10-03 02:10:09,762][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 02:10:13,484][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 02:10:13,486][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 7 @ 1658 updates, score None) (writing took 3.725987625308335 seconds)
+[2024-10-03 02:10:13,487][fairseq_cli.train][INFO] - end of epoch 7 (average epoch stats below)
+[2024-10-03 02:10:13,490][train][INFO] - {"epoch": 7, "train_loss": "1.316", "train_ntokens": "521616", "train_nsentences": "3529.53", "train_wps": "113454", "train_ups": "0.22", "train_wpb": "521616", "train_bsz": "3529.5", "train_num_updates": "1658", "train_lr": "0.000346963", "train_gnorm": "1.61", "train_loss_scale": "0.5", "train_train_wall": "747", "train_gb_free": "34.2", "train_wall": "8511"}
+[2024-10-03 02:10:13,540][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 02:10:13,573][fairseq.trainer][INFO] - begin training epoch 8
+[2024-10-03 02:10:13,573][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 02:23:30,626][train_inner][INFO] - {"epoch": 8, "update": 7.597, "loss": "1.284", "ntokens": "521701", "nsentences": "3505.57", "wps": "110018", "ups": "0.21", "wpb": "521701", "bsz": "3505.6", "num_updates": "1800", "lr": "0.00037625", "gnorm": "1.562", "loss_scale": "0.5", "train_wall": "587", "gb_free": "34.2", "wall": "9308"}
+[2024-10-03 02:28:24,403][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 8 @ 1896 updates
+[2024-10-03 02:28:24,404][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 02:28:27,624][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 02:28:27,626][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 8 @ 1896 updates, score None) (writing took 3.223505017347634 seconds)
+[2024-10-03 02:28:27,627][fairseq_cli.train][INFO] - end of epoch 8 (average epoch stats below)
+[2024-10-03 02:28:27,629][train][INFO] - {"epoch": 8, "train_loss": "1.27", "train_ntokens": "521848", "train_nsentences": "3529.53", "train_wps": "113514", "train_ups": "0.22", "train_wpb": "521848", "train_bsz": "3529.5", "train_num_updates": "1896", "train_lr": "0.00039605", "train_gnorm": "1.52", "train_loss_scale": "0.5", "train_train_wall": "733", "train_gb_free": "35.2", "train_wall": "9605"}
+[2024-10-03 02:28:27,727][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 02:28:27,791][fairseq.trainer][INFO] - begin training epoch 9
+[2024-10-03 02:28:27,792][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 02:39:53,386][train_inner][INFO] - {"epoch": 9, "update": 8.437, "loss": "1.254", "ntokens": "521192", "nsentences": "3550.82", "wps": "106068", "ups": "0.2", "wpb": "521192", "bsz": "3550.8", "num_updates": "2000", "lr": "0.0004175", "gnorm": "1.459", "loss_scale": "0.5", "train_wall": "552", "gb_free": "35.2", "wall": "10291"}
+[2024-10-03 02:45:20,865][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 9 @ 2134 updates
+[2024-10-03 02:45:20,874][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 02:45:33,205][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 02:45:33,426][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 9 @ 2134 updates, score None) (writing took 12.560994521714747 seconds)
+[2024-10-03 02:45:33,443][fairseq_cli.train][INFO] - end of epoch 9 (average epoch stats below)
+[2024-10-03 02:45:33,462][train][INFO] - {"epoch": 9, "train_loss": "1.239", "train_ntokens": "521960", "train_nsentences": "3529.53", "train_wps": "121100", "train_ups": "0.23", "train_wpb": "521960", "train_bsz": "3529.5", "train_num_updates": "2134", "train_lr": "0.000445138", "train_gnorm": "1.422", "train_loss_scale": "0.5", "train_train_wall": "583", "train_gb_free": "34.3", "train_wall": "10631"}
+[2024-10-03 02:45:33,578][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 02:45:33,621][fairseq.trainer][INFO] - begin training epoch 10
+[2024-10-03 02:45:33,622][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 02:55:04,747][train_inner][INFO] - {"epoch": 10, "update": 9.277, "loss": "1.227", "ntokens": "522011", "nsentences": "3487.74", "wps": "114557", "ups": "0.22", "wpb": "522011", "bsz": "3487.7", "num_updates": "2200", "lr": "0.00045875", "gnorm": "1.411", "loss_scale": "0.5", "train_wall": "409", "gb_free": "33.3", "wall": "11202"}
+[2024-10-03 03:02:39,147][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 10 @ 2372 updates
+[2024-10-03 03:02:39,166][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 03:02:50,994][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 03:02:51,014][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 10 @ 2372 updates, score None) (writing took 11.867246783338487 seconds)
+[2024-10-03 03:02:51,015][fairseq_cli.train][INFO] - end of epoch 10 (average epoch stats below)
+[2024-10-03 03:02:51,017][train][INFO] - {"epoch": 10, "train_loss": "1.211", "train_ntokens": "521561", "train_nsentences": "3529.53", "train_wps": "119639", "train_ups": "0.23", "train_wpb": "521561", "train_bsz": "3529.5", "train_num_updates": "2372", "train_lr": "0.000494225", "train_gnorm": "1.368", "train_loss_scale": "0.5", "train_train_wall": "309", "train_gb_free": "33.3", "train_wall": "11669"}
+[2024-10-03 03:02:51,087][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 03:02:51,094][fairseq.trainer][INFO] - begin training epoch 11
+[2024-10-03 03:02:51,094][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 03:10:53,836][train_inner][INFO] - {"epoch": 11, "update": 10.118, "loss": "1.206", "ntokens": "521081", "nsentences": "3536.38", "wps": "109808", "ups": "0.21", "wpb": "521082", "bsz": "3536.4", "num_updates": "2400", "lr": "0.0005", "gnorm": "1.314", "loss_scale": "0.5", "train_wall": "277", "gb_free": "33.3", "wall": "12151"}
+[2024-10-03 03:20:47,579][train_inner][INFO] - {"epoch": 11, "update": 10.958, "loss": "1.182", "ntokens": "523182", "nsentences": "3534.7", "wps": "176240", "ups": "0.34", "wpb": "523182", "bsz": "3534.7", "num_updates": "2600", "lr": "0.0005", "gnorm": "1.198", "loss_scale": "0.5", "train_wall": "177", "gb_free": "35.2", "wall": "12745"}
+[2024-10-03 03:20:53,998][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 11 @ 2610 updates
+[2024-10-03 03:20:53,999][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 03:20:58,216][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 03:20:58,220][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 11 @ 2610 updates, score None) (writing took 4.222080430947244 seconds)
+[2024-10-03 03:20:58,220][fairseq_cli.train][INFO] - end of epoch 11 (average epoch stats below)
+[2024-10-03 03:20:58,223][train][INFO] - {"epoch": 11, "train_loss": "1.184", "train_ntokens": "521316", "train_nsentences": "3529.53", "train_wps": "114122", "train_ups": "0.22", "train_wpb": "521316", "train_bsz": "3529.5", "train_num_updates": "2610", "train_lr": "0.0005", "train_gnorm": "1.188", "train_loss_scale": "0.5", "train_train_wall": "238", "train_gb_free": "34.2", "train_wall": "12756"}
+[2024-10-03 03:20:58,273][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 03:20:58,280][fairseq.trainer][INFO] - begin training epoch 12
+[2024-10-03 03:20:58,280][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 03:37:49,568][train_inner][INFO] - {"epoch": 12, "update": 11.798, "loss": "1.161", "ntokens": "521421", "nsentences": "3525.3", "wps": "102044", "ups": "0.2", "wpb": "521421", "bsz": "3525.3", "num_updates": "2800", "lr": "0.0005", "gnorm": "1.11", "loss_scale": "0.5", "train_wall": "647", "gb_free": "34.2", "wall": "13767"}
+[2024-10-03 03:40:11,846][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 12 @ 2848 updates
+[2024-10-03 03:40:11,848][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 03:40:15,360][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 03:40:15,363][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 12 @ 2848 updates, score None) (writing took 3.516868744045496 seconds)
+[2024-10-03 03:40:15,363][fairseq_cli.train][INFO] - end of epoch 12 (average epoch stats below)
+[2024-10-03 03:40:15,366][train][INFO] - {"epoch": 12, "train_loss": "1.158", "train_ntokens": "521842", "train_nsentences": "3529.53", "train_wps": "107332", "train_ups": "0.21", "train_wpb": "521842", "train_bsz": "3529.5", "train_num_updates": "2848", "train_lr": "0.0005", "train_gnorm": "1.084", "train_loss_scale": "1", "train_train_wall": "782", "train_gb_free": "33.3", "train_wall": "13913"}
+[2024-10-03 03:40:15,448][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 03:40:15,454][fairseq.trainer][INFO] - begin training epoch 13
+[2024-10-03 03:40:15,454][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 03:48:04,699][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 0.5
+[2024-10-03 03:56:11,393][train_inner][INFO] - {"epoch": 13, "update": 12.643, "loss": "1.14", "ntokens": "521010", "nsentences": "3544.24", "wps": "94573.4", "ups": "0.18", "wpb": "521010", "bsz": "3544.2", "num_updates": "3000", "lr": "0.0005", "gnorm": "1.029", "loss_scale": "0.5", "train_wall": "727", "gb_free": "33.3", "wall": "14869"}
+[2024-10-03 03:59:54,268][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 13 @ 3085 updates
+[2024-10-03 03:59:54,269][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 03:59:57,989][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 03:59:57,995][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 13 @ 3085 updates, score None) (writing took 3.7272198367863894 seconds)
+[2024-10-03 03:59:57,996][fairseq_cli.train][INFO] - end of epoch 13 (average epoch stats below)
+[2024-10-03 03:59:58,018][train][INFO] - {"epoch": 13, "train_loss": "1.133", "train_ntokens": "521712", "train_nsentences": "3527.73", "train_wps": "104551", "train_ups": "0.2", "train_wpb": "521712", "train_bsz": "3527.7", "train_num_updates": "3085", "train_lr": "0.0005", "train_gnorm": "1.013", "train_loss_scale": "0.5", "train_train_wall": "807", "train_gb_free": "33.3", "train_wall": "15096"}
+[2024-10-03 03:59:58,142][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 03:59:58,159][fairseq.trainer][INFO] - begin training epoch 14
+[2024-10-03 03:59:58,159][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 04:12:38,010][train_inner][INFO] - {"epoch": 14, "update": 13.483, "loss": "1.122", "ntokens": "521750", "nsentences": "3518.64", "wps": "105766", "ups": "0.2", "wpb": "521750", "bsz": "3518.6", "num_updates": "3200", "lr": "0.0005", "gnorm": "0.945", "loss_scale": "0.5", "train_wall": "626", "gb_free": "35.2", "wall": "15856"}
+[2024-10-03 04:19:02,939][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 14 @ 3323 updates
+[2024-10-03 04:19:02,940][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 04:19:05,569][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 04:19:05,572][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 14 @ 3323 updates, score None) (writing took 2.6331147206947207 seconds)
+[2024-10-03 04:19:05,572][fairseq_cli.train][INFO] - end of epoch 14 (average epoch stats below)
+[2024-10-03 04:19:05,575][train][INFO] - {"epoch": 14, "train_loss": "1.114", "train_ntokens": "521833", "train_nsentences": "3529.53", "train_wps": "108227", "train_ups": "0.21", "train_wpb": "521833", "train_bsz": "3529.5", "train_num_updates": "3323", "train_lr": "0.0005", "train_gnorm": "0.948", "train_loss_scale": "0.5", "train_train_wall": "786", "train_gb_free": "33.3", "train_wall": "16243"}
+[2024-10-03 04:19:05,638][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 04:19:05,643][fairseq.trainer][INFO] - begin training epoch 15
+[2024-10-03 04:19:05,644][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 04:29:46,673][train_inner][INFO] - {"epoch": 15, "update": 14.324, "loss": "1.106", "ntokens": "521631", "nsentences": "3510.19", "wps": "101420", "ups": "0.19", "wpb": "521631", "bsz": "3510.2", "num_updates": "3400", "lr": "0.0005", "gnorm": "0.904", "loss_scale": "0.5", "train_wall": "650", "gb_free": "33.3", "wall": "16884"}
+[2024-10-03 04:38:34,480][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 15 @ 3561 updates
+[2024-10-03 04:38:34,481][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 04:38:38,342][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 04:38:38,348][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 15 @ 3561 updates, score None) (writing took 3.8683804981410503 seconds)
+[2024-10-03 04:38:38,352][fairseq_cli.train][INFO] - end of epoch 15 (average epoch stats below)
+[2024-10-03 04:38:38,356][train][INFO] - {"epoch": 15, "train_loss": "1.097", "train_ntokens": "521759", "train_nsentences": "3529.53", "train_wps": "105884", "train_ups": "0.2", "train_wpb": "521759", "train_bsz": "3529.5", "train_num_updates": "3561", "train_lr": "0.0005", "train_gnorm": "0.858", "train_loss_scale": "0.5", "train_train_wall": "793", "train_gb_free": "34.2", "train_wall": "17416"}
+[2024-10-03 04:38:38,547][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 04:38:38,565][fairseq.trainer][INFO] - begin training epoch 16
+[2024-10-03 04:38:38,565][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 04:47:05,287][train_inner][INFO] - {"epoch": 16, "update": 15.164, "loss": "1.094", "ntokens": "521322", "nsentences": "3544.17", "wps": "100389", "ups": "0.19", "wpb": "521322", "bsz": "3544.2", "num_updates": "3600", "lr": "0.0005", "gnorm": "0.858", "loss_scale": "0.5", "train_wall": "680", "gb_free": "33.3", "wall": "17923"}
+[2024-10-03 04:57:10,208][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 16 @ 3799 updates
+[2024-10-03 04:57:10,214][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 04:57:18,315][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 04:57:18,341][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 16 @ 3799 updates, score None) (writing took 8.133453481830657 seconds)
+[2024-10-03 04:57:18,342][fairseq_cli.train][INFO] - end of epoch 16 (average epoch stats below)
+[2024-10-03 04:57:18,363][train][INFO] - {"epoch": 16, "train_loss": "1.082", "train_ntokens": "522143", "train_nsentences": "3529.53", "train_wps": "110957", "train_ups": "0.21", "train_wpb": "522143", "train_bsz": "3529.5", "train_num_updates": "3799", "train_lr": "0.0005", "train_gnorm": "0.825", "train_loss_scale": "0.5", "train_train_wall": "755", "train_gb_free": "33.3", "train_wall": "18536"}
+[2024-10-03 04:57:18,434][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 04:57:18,461][fairseq.trainer][INFO] - begin training epoch 17
+[2024-10-03 04:57:18,461][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 05:03:37,234][train_inner][INFO] - {"epoch": 17, "update": 16.004, "loss": "1.081", "ntokens": "521852", "nsentences": "3517.11", "wps": "105219", "ups": "0.2", "wpb": "521852", "bsz": "3517.1", "num_updates": "3800", "lr": "0.0005", "gnorm": "0.834", "loss_scale": "0.5", "train_wall": "618", "gb_free": "37.1", "wall": "18915"}
+[2024-10-03 05:12:15,970][train_inner][INFO] - {"epoch": 17, "update": 16.845, "loss": "1.068", "ntokens": "524067", "nsentences": "3507.55", "wps": "202059", "ups": "0.39", "wpb": "524067", "bsz": "3507.6", "num_updates": "4000", "lr": "0.0005", "gnorm": "0.779", "loss_scale": "0.5", "train_wall": "511", "gb_free": "33.3", "wall": "19434"}
+[2024-10-03 05:13:38,103][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 17 @ 4037 updates
+[2024-10-03 05:13:38,114][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 05:13:43,305][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 05:13:43,311][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 17 @ 4037 updates, score None) (writing took 5.207711840048432 seconds)
+[2024-10-03 05:13:43,312][fairseq_cli.train][INFO] - end of epoch 17 (average epoch stats below)
+[2024-10-03 05:13:43,316][train][INFO] - {"epoch": 17, "train_loss": "1.068", "train_ntokens": "521833", "train_nsentences": "3529.53", "train_wps": "126094", "train_ups": "0.24", "train_wpb": "521833", "train_bsz": "3529.5", "train_num_updates": "4037", "train_lr": "0.0005", "train_gnorm": "0.783", "train_loss_scale": "0.5", "train_train_wall": "613", "train_gb_free": "34.2", "train_wall": "19521"}
+[2024-10-03 05:13:43,381][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 05:13:43,392][fairseq.trainer][INFO] - begin training epoch 18
+[2024-10-03 05:13:43,392][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 05:28:12,644][train_inner][INFO] - {"epoch": 18, "update": 17.685, "loss": "1.06", "ntokens": "521135", "nsentences": "3596.49", "wps": "108948", "ups": "0.21", "wpb": "521135", "bsz": "3596.5", "num_updates": "4200", "lr": "0.0005", "gnorm": "0.757", "loss_scale": "0.5", "train_wall": "626", "gb_free": "33.3", "wall": "20390"}
+[2024-10-03 05:31:09,714][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 18 @ 4275 updates
+[2024-10-03 05:31:09,715][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 05:31:13,707][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 05:31:13,710][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 18 @ 4275 updates, score None) (writing took 3.9964495776221156 seconds)
+[2024-10-03 05:31:13,711][fairseq_cli.train][INFO] - end of epoch 18 (average epoch stats below)
+[2024-10-03 05:31:13,713][train][INFO] - {"epoch": 18, "train_loss": "1.056", "train_ntokens": "521772", "train_nsentences": "3529.53", "train_wps": "118224", "train_ups": "0.23", "train_wpb": "521772", "train_bsz": "3529.5", "train_num_updates": "4275", "train_lr": "0.0005", "train_gnorm": "0.737", "train_loss_scale": "0.5", "train_train_wall": "720", "train_gb_free": "33.3", "train_wall": "20571"}
+[2024-10-03 05:31:13,789][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 05:31:13,831][fairseq.trainer][INFO] - begin training epoch 19
+[2024-10-03 05:31:13,832][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 05:43:29,594][train_inner][INFO] - {"epoch": 19, "update": 18.525, "loss": "1.048", "ntokens": "521290", "nsentences": "3499.73", "wps": "113703", "ups": "0.22", "wpb": "521290", "bsz": "3499.7", "num_updates": "4400", "lr": "0.0005", "gnorm": "0.758", "loss_scale": "0.5", "train_wall": "323", "gb_free": "35.5", "wall": "21307"}
+[2024-10-03 05:49:08,689][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 19 @ 4513 updates
+[2024-10-03 05:49:08,690][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 05:49:12,333][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 05:49:12,338][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 19 @ 4513 updates, score None) (writing took 3.6488287542015314 seconds)
+[2024-10-03 05:49:12,338][fairseq_cli.train][INFO] - end of epoch 19 (average epoch stats below)
+[2024-10-03 05:49:12,342][train][INFO] - {"epoch": 19, "train_loss": "1.046", "train_ntokens": "521734", "train_nsentences": "3529.53", "train_wps": "115121", "train_ups": "0.22", "train_wpb": "521734", "train_bsz": "3529.5", "train_num_updates": "4513", "train_lr": "0.0005", "train_gnorm": "0.746", "train_loss_scale": "0.5", "train_train_wall": "267", "train_gb_free": "33.3", "train_wall": "21650"}
+[2024-10-03 05:49:12,416][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 05:49:12,447][fairseq.trainer][INFO] - begin training epoch 20
+[2024-10-03 05:49:12,447][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 05:59:37,165][train_inner][INFO] - {"epoch": 20, "update": 19.366, "loss": "1.042", "ntokens": "521556", "nsentences": "3525.94", "wps": "107808", "ups": "0.21", "wpb": "521556", "bsz": "3525.9", "num_updates": "4600", "lr": "0.0005", "gnorm": "0.7", "loss_scale": "0.5", "train_wall": "396", "gb_free": "33.5", "wall": "22275"}
+[2024-10-03 06:07:01,961][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 20 @ 4751 updates
+[2024-10-03 06:07:01,963][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 06:07:06,266][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 06:07:06,272][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 20 @ 4751 updates, score None) (writing took 4.311040326952934 seconds)
+[2024-10-03 06:07:06,273][fairseq_cli.train][INFO] - end of epoch 20 (average epoch stats below)
+[2024-10-03 06:07:06,276][train][INFO] - {"epoch": 20, "train_loss": "1.037", "train_ntokens": "521553", "train_nsentences": "3529.53", "train_wps": "115584", "train_ups": "0.22", "train_wpb": "521552", "train_bsz": "3529.5", "train_num_updates": "4751", "train_lr": "0.0005", "train_gnorm": "0.688", "train_loss_scale": "0.5", "train_train_wall": "717", "train_gb_free": "33.6", "train_wall": "22724"}
+[2024-10-03 06:07:06,416][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 06:07:06,459][fairseq.trainer][INFO] - begin training epoch 21
+[2024-10-03 06:07:06,459][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 06:15:42,849][train_inner][INFO] - {"epoch": 21, "update": 20.206, "loss": "1.035", "ntokens": "521033", "nsentences": "3513.7", "wps": "107910", "ups": "0.21", "wpb": "521033", "bsz": "3513.7", "num_updates": "4800", "lr": "0.0005", "gnorm": "0.699", "loss_scale": "0.5", "train_wall": "573", "gb_free": "33.3", "wall": "23240"}
+[2024-10-03 06:20:29,623][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 0.5
+[2024-10-03 06:24:20,030][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 21 @ 4988 updates
+[2024-10-03 06:24:20,032][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 06:24:24,203][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 06:24:24,206][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 21 @ 4988 updates, score None) (writing took 4.175257348455489 seconds)
+[2024-10-03 06:24:24,206][fairseq_cli.train][INFO] - end of epoch 21 (average epoch stats below)
+[2024-10-03 06:24:24,208][train][INFO] - {"epoch": 21, "train_loss": "1.026", "train_ntokens": "521584", "train_nsentences": "3531.71", "train_wps": "119098", "train_ups": "0.23", "train_wpb": "521584", "train_bsz": "3531.7", "train_num_updates": "4988", "train_lr": "0.0005", "train_gnorm": "0.693", "train_loss_scale": "0.5", "train_train_wall": "642", "train_gb_free": "35.2", "train_wall": "23762"}
+[2024-10-03 06:24:24,287][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 06:24:24,315][fairseq.trainer][INFO] - begin training epoch 22
+[2024-10-03 06:24:24,315][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 06:31:27,201][train_inner][INFO] - {"epoch": 22, "update": 21.05, "loss": "1.025", "ntokens": "521256", "nsentences": "3532.65", "wps": "110397", "ups": "0.21", "wpb": "521256", "bsz": "3532.7", "num_updates": "5000", "lr": "0.0005", "gnorm": "0.684", "loss_scale": "0.5", "train_wall": "560", "gb_free": "33.5", "wall": "24185"}
+[2024-10-03 06:42:02,266][train_inner][INFO] - {"epoch": 22, "update": 21.891, "loss": "1.019", "ntokens": "523371", "nsentences": "3568.7", "wps": "164826", "ups": "0.31", "wpb": "523371", "bsz": "3568.7", "num_updates": "5200", "lr": "0.0005", "gnorm": "0.645", "loss_scale": "0.5", "train_wall": "628", "gb_free": "34.2", "wall": "24820"}
+[2024-10-03 06:42:51,837][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 22 @ 5226 updates
+[2024-10-03 06:42:51,839][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 06:42:57,543][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 06:42:57,546][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 22 @ 5226 updates, score None) (writing took 5.709098348394036 seconds)
+[2024-10-03 06:42:57,547][fairseq_cli.train][INFO] - end of epoch 22 (average epoch stats below)
+[2024-10-03 06:42:57,549][train][INFO] - {"epoch": 22, "train_loss": "1.019", "train_ntokens": "521724", "train_nsentences": "3529.53", "train_wps": "111530", "train_ups": "0.21", "train_wpb": "521724", "train_bsz": "3529.5", "train_num_updates": "5226", "train_lr": "0.0005", "train_gnorm": "0.643", "train_loss_scale": "0.5", "train_train_wall": "727", "train_gb_free": "33.3", "train_wall": "24875"}
+[2024-10-03 06:42:57,703][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 06:42:57,752][fairseq.trainer][INFO] - begin training epoch 23
+[2024-10-03 06:42:57,753][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 06:58:16,262][train_inner][INFO] - {"epoch": 23, "update": 22.731, "loss": "1.011", "ntokens": "521544", "nsentences": "3519.03", "wps": "107094", "ups": "0.21", "wpb": "521544", "bsz": "3519", "num_updates": "5400", "lr": "0.0005", "gnorm": "0.592", "loss_scale": "0.5", "train_wall": "476", "gb_free": "33.4", "wall": "25794"}
+[2024-10-03 07:01:22,343][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 23 @ 5464 updates
+[2024-10-03 07:01:22,355][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 07:01:27,589][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 07:01:27,598][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 23 @ 5464 updates, score None) (writing took 5.255309268832207 seconds)
+[2024-10-03 07:01:27,599][fairseq_cli.train][INFO] - end of epoch 23 (average epoch stats below)
+[2024-10-03 07:01:27,607][train][INFO] - {"epoch": 23, "train_loss": "1.011", "train_ntokens": "521821", "train_nsentences": "3529.53", "train_wps": "111881", "train_ups": "0.21", "train_wpb": "521821", "train_bsz": "3529.5", "train_num_updates": "5464", "train_lr": "0.0005", "train_gnorm": "0.612", "train_loss_scale": "0.5", "train_train_wall": "612", "train_gb_free": "34.3", "train_wall": "25985"}
+[2024-10-03 07:01:27,698][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 07:01:27,737][fairseq.trainer][INFO] - begin training epoch 24
+[2024-10-03 07:01:27,737][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 07:15:39,230][train_inner][INFO] - {"epoch": 24, "update": 23.571, "loss": "1.007", "ntokens": "521614", "nsentences": "3490.78", "wps": "100026", "ups": "0.19", "wpb": "521614", "bsz": "3490.8", "num_updates": "5600", "lr": "0.0005", "gnorm": "0.622", "loss_scale": "0.5", "train_wall": "714", "gb_free": "34.3", "wall": "26837"}
+[2024-10-03 07:19:46,844][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 24 @ 5702 updates
+[2024-10-03 07:19:46,846][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 07:19:50,742][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 07:19:50,748][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 24 @ 5702 updates, score None) (writing took 3.9034297401085496 seconds)
+[2024-10-03 07:19:50,748][fairseq_cli.train][INFO] - end of epoch 24 (average epoch stats below)
+[2024-10-03 07:19:50,752][train][INFO] - {"epoch": 24, "train_loss": "1.004", "train_ntokens": "521886", "train_nsentences": "3529.53", "train_wps": "112596", "train_ups": "0.22", "train_wpb": "521886", "train_bsz": "3529.5", "train_num_updates": "5702", "train_lr": "0.0005", "train_gnorm": "0.602", "train_loss_scale": "0.5", "train_train_wall": "774", "train_gb_free": "33.3", "train_wall": "27088"}
+[2024-10-03 07:19:50,812][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 07:19:50,846][fairseq.trainer][INFO] - begin training epoch 25
+[2024-10-03 07:19:50,847][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 07:32:11,412][train_inner][INFO] - {"epoch": 25, "update": 24.412, "loss": "1", "ntokens": "521574", "nsentences": "3559.64", "wps": "105137", "ups": "0.2", "wpb": "521574", "bsz": "3559.6", "num_updates": "5800", "lr": "0.0005", "gnorm": "0.629", "loss_scale": "0.5", "train_wall": "625", "gb_free": "34.2", "wall": "27829"}
+[2024-10-03 07:39:22,429][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 25 @ 5940 updates
+[2024-10-03 07:39:22,430][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 07:39:26,348][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 07:39:26,351][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 25 @ 5940 updates, score None) (writing took 3.9221811182796955 seconds)
+[2024-10-03 07:39:26,352][fairseq_cli.train][INFO] - end of epoch 25 (average epoch stats below)
+[2024-10-03 07:39:26,356][train][INFO] - {"epoch": 25, "train_loss": "0.997", "train_ntokens": "521701", "train_nsentences": "3529.53", "train_wps": "105618", "train_ups": "0.2", "train_wpb": "521701", "train_bsz": "3529.5", "train_num_updates": "5940", "train_lr": "0.0005", "train_gnorm": "0.636", "train_loss_scale": "0.5", "train_train_wall": "805", "train_gb_free": "35.2", "train_wall": "28264"}
+[2024-10-03 07:39:26,422][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 07:39:26,468][fairseq.trainer][INFO] - begin training epoch 26
+[2024-10-03 07:39:26,468][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 07:49:26,843][train_inner][INFO] - {"epoch": 26, "update": 25.252, "loss": "0.994", "ntokens": "521551", "nsentences": "3488.64", "wps": "100741", "ups": "0.19", "wpb": "521551", "bsz": "3488.6", "num_updates": "6000", "lr": "0.0005", "gnorm": "0.609", "loss_scale": "0.5", "train_wall": "679", "gb_free": "33.3", "wall": "28864"}
+[2024-10-03 07:58:10,930][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 26 @ 6178 updates
+[2024-10-03 07:58:10,931][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 07:58:14,377][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 07:58:14,379][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 26 @ 6178 updates, score None) (writing took 3.449789081700146 seconds)
+[2024-10-03 07:58:14,380][fairseq_cli.train][INFO] - end of epoch 26 (average epoch stats below)
+[2024-10-03 07:58:14,384][train][INFO] - {"epoch": 26, "train_loss": "0.991", "train_ntokens": "521759", "train_nsentences": "3529.53", "train_wps": "110085", "train_ups": "0.21", "train_wpb": "521759", "train_bsz": "3529.5", "train_num_updates": "6178", "train_lr": "0.0005", "train_gnorm": "0.551", "train_loss_scale": "0.5", "train_train_wall": "772", "train_gb_free": "34.2", "train_wall": "29392"}
+[2024-10-03 07:58:14,448][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 07:58:14,477][fairseq.trainer][INFO] - begin training epoch 27
+[2024-10-03 07:58:14,477][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 08:06:12,095][train_inner][INFO] - {"epoch": 27, "update": 26.092, "loss": "0.991", "ntokens": "520743", "nsentences": "3585.28", "wps": "103605", "ups": "0.2", "wpb": "520744", "bsz": "3585.3", "num_updates": "6200", "lr": "0.0005", "gnorm": "0.546", "loss_scale": "0.5", "train_wall": "657", "gb_free": "35.9", "wall": "29870"}
+[2024-10-03 08:16:11,140][train_inner][INFO] - {"epoch": 27, "update": 26.933, "loss": "0.985", "ntokens": "524188", "nsentences": "3483.49", "wps": "175011", "ups": "0.33", "wpb": "524188", "bsz": "3483.5", "num_updates": "6400", "lr": "0.0005", "gnorm": "0.532", "loss_scale": "0.5", "train_wall": "591", "gb_free": "34.2", "wall": "30469"}
+[2024-10-03 08:16:40,580][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 27 @ 6416 updates
+[2024-10-03 08:16:40,581][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 08:16:49,341][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 08:16:49,474][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 27 @ 6416 updates, score None) (writing took 8.893674064427614 seconds)
+[2024-10-03 08:16:49,474][fairseq_cli.train][INFO] - end of epoch 27 (average epoch stats below)
+[2024-10-03 08:16:49,483][train][INFO] - {"epoch": 27, "train_loss": "0.985", "train_ntokens": "521729", "train_nsentences": "3529.53", "train_wps": "111356", "train_ups": "0.21", "train_wpb": "521729", "train_bsz": "3529.5", "train_num_updates": "6416", "train_lr": "0.0005", "train_gnorm": "0.552", "train_loss_scale": "0.5", "train_train_wall": "756", "train_gb_free": "34.3", "train_wall": "30507"}
+[2024-10-03 08:16:49,656][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 08:16:49,721][fairseq.trainer][INFO] - begin training epoch 28
+[2024-10-03 08:16:49,721][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 08:33:12,999][train_inner][INFO] - {"epoch": 28, "update": 27.773, "loss": "0.984", "ntokens": "520659", "nsentences": "3589.36", "wps": "101905", "ups": "0.2", "wpb": "520659", "bsz": "3589.4", "num_updates": "6600", "lr": "0.0005", "gnorm": "0.584", "loss_scale": "0.5", "train_wall": "672", "gb_free": "33.5", "wall": "31491"}
+[2024-10-03 08:35:34,530][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 28 @ 6654 updates
+[2024-10-03 08:35:34,531][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 08:35:38,081][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 08:35:38,083][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 28 @ 6654 updates, score None) (writing took 3.5531101655215025 seconds)
+[2024-10-03 08:35:38,084][fairseq_cli.train][INFO] - end of epoch 28 (average epoch stats below)
+[2024-10-03 08:35:38,086][train][INFO] - {"epoch": 28, "train_loss": "0.982", "train_ntokens": "521616", "train_nsentences": "3529.53", "train_wps": "109999", "train_ups": "0.21", "train_wpb": "521616", "train_bsz": "3529.5", "train_num_updates": "6654", "train_lr": "0.0005", "train_gnorm": "0.551", "train_loss_scale": "0.5", "train_train_wall": "785", "train_gb_free": "33.3", "train_wall": "31636"}
+[2024-10-03 08:35:38,168][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 08:35:38,193][fairseq.trainer][INFO] - begin training epoch 29
+[2024-10-03 08:35:38,194][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 08:50:00,769][train_inner][INFO] - {"epoch": 29, "update": 28.613, "loss": "0.977", "ntokens": "521823", "nsentences": "3484.27", "wps": "103561", "ups": "0.2", "wpb": "521824", "bsz": "3484.3", "num_updates": "6800", "lr": "0.0005", "gnorm": "0.535", "loss_scale": "0.5", "train_wall": "684", "gb_free": "36.1", "wall": "32498"}
+[2024-10-03 08:53:54,079][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 29 @ 6892 updates
+[2024-10-03 08:53:54,110][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 08:54:00,359][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 08:54:00,363][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 29 @ 6892 updates, score None) (writing took 6.283381598070264 seconds)
+[2024-10-03 08:54:00,363][fairseq_cli.train][INFO] - end of epoch 29 (average epoch stats below)
+[2024-10-03 08:54:00,368][train][INFO] - {"epoch": 29, "train_loss": "0.976", "train_ntokens": "521921", "train_nsentences": "3529.53", "train_wps": "112692", "train_ups": "0.22", "train_wpb": "521922", "train_bsz": "3529.5", "train_num_updates": "6892", "train_lr": "0.0005", "train_gnorm": "0.566", "train_loss_scale": "0.5", "train_train_wall": "772", "train_gb_free": "33.3", "train_wall": "32738"}
+[2024-10-03 08:54:00,422][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 08:54:00,429][fairseq.trainer][INFO] - begin training epoch 30
+[2024-10-03 08:54:00,429][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 09:05:07,349][train_inner][INFO] - {"epoch": 30, "update": 29.454, "loss": "0.972", "ntokens": "521722", "nsentences": "3521.02", "wps": "115098", "ups": "0.22", "wpb": "521722", "bsz": "3521", "num_updates": "7000", "lr": "0.0005", "gnorm": "0.52", "loss_scale": "1", "train_wall": "533", "gb_free": "33.3", "wall": "33405"}
+[2024-10-03 09:11:39,323][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 30 @ 7130 updates
+[2024-10-03 09:11:39,325][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 09:11:43,291][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 09:11:43,296][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 30 @ 7130 updates, score None) (writing took 3.972861632704735 seconds)
+[2024-10-03 09:11:43,297][fairseq_cli.train][INFO] - end of epoch 30 (average epoch stats below)
+[2024-10-03 09:11:43,304][train][INFO] - {"epoch": 30, "train_loss": "0.971", "train_ntokens": "521749", "train_nsentences": "3529.53", "train_wps": "116825", "train_ups": "0.22", "train_wpb": "521749", "train_bsz": "3529.5", "train_num_updates": "7130", "train_lr": "0.0005", "train_gnorm": "0.491", "train_loss_scale": "1", "train_train_wall": "691", "train_gb_free": "33.3", "train_wall": "33801"}
+[2024-10-03 09:11:43,404][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 09:11:43,449][fairseq.trainer][INFO] - begin training epoch 31
+[2024-10-03 09:11:43,449][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 09:21:54,482][train_inner][INFO] - {"epoch": 31, "update": 30.294, "loss": "0.969", "ntokens": "520831", "nsentences": "3537.41", "wps": "103429", "ups": "0.2", "wpb": "520831", "bsz": "3537.4", "num_updates": "7200", "lr": "0.0005", "gnorm": "0.521", "loss_scale": "1", "train_wall": "659", "gb_free": "33.3", "wall": "34412"}
+[2024-10-03 09:30:15,211][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 31 @ 7368 updates
+[2024-10-03 09:30:15,212][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 09:30:18,717][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 09:30:18,723][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 31 @ 7368 updates, score None) (writing took 3.511919512413442 seconds)
+[2024-10-03 09:30:18,723][fairseq_cli.train][INFO] - end of epoch 31 (average epoch stats below)
+[2024-10-03 09:30:18,727][train][INFO] - {"epoch": 31, "train_loss": "0.966", "train_ntokens": "521543", "train_nsentences": "3529.53", "train_wps": "111283", "train_ups": "0.21", "train_wpb": "521543", "train_bsz": "3529.5", "train_num_updates": "7368", "train_lr": "0.0005", "train_gnorm": "0.521", "train_loss_scale": "1", "train_train_wall": "768", "train_gb_free": "34.2", "train_wall": "34916"}
+[2024-10-03 09:30:18,842][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 09:30:18,887][fairseq.trainer][INFO] - begin training epoch 32
+[2024-10-03 09:30:18,887][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 09:38:23,134][train_inner][INFO] - {"epoch": 32, "update": 31.134, "loss": "0.967", "ntokens": "520914", "nsentences": "3555.75", "wps": "105379", "ups": "0.2", "wpb": "520914", "bsz": "3555.8", "num_updates": "7400", "lr": "0.0005", "gnorm": "0.528", "loss_scale": "1", "train_wall": "639", "gb_free": "33.3", "wall": "35401"}
+[2024-10-03 09:46:58,758][train_inner][INFO] - {"epoch": 32, "update": 31.975, "loss": "0.961", "ntokens": "524319", "nsentences": "3520.09", "wps": "203391", "ups": "0.39", "wpb": "524319", "bsz": "3520.1", "num_updates": "7600", "lr": "0.0005", "gnorm": "0.506", "loss_scale": "1", "train_wall": "509", "gb_free": "33.3", "wall": "35916"}
+[2024-10-03 09:47:08,632][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 32 @ 7606 updates
+[2024-10-03 09:47:08,633][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 09:47:20,217][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 09:47:20,650][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 32 @ 7606 updates, score None) (writing took 12.018069256097078 seconds)
+[2024-10-03 09:47:20,651][fairseq_cli.train][INFO] - end of epoch 32 (average epoch stats below)
+[2024-10-03 09:47:20,662][train][INFO] - {"epoch": 32, "train_loss": "0.962", "train_ntokens": "521853", "train_nsentences": "3529.53", "train_wps": "121537", "train_ups": "0.23", "train_wpb": "521853", "train_bsz": "3529.5", "train_num_updates": "7606", "train_lr": "0.0005", "train_gnorm": "0.526", "train_loss_scale": "1", "train_train_wall": "661", "train_gb_free": "34.2", "train_wall": "35938"}
+[2024-10-03 09:47:20,845][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 09:47:20,897][fairseq.trainer][INFO] - begin training epoch 33
+[2024-10-03 09:47:20,898][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 09:53:56,266][fairseq.trainer][INFO] - NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 0.5
+[2024-10-03 10:04:20,352][train_inner][INFO] - {"epoch": 33, "update": 32.819, "loss": "0.959", "ntokens": "521745", "nsentences": "3551.04", "wps": "100183", "ups": "0.19", "wpb": "521745", "bsz": "3551", "num_updates": "7800", "lr": "0.0005", "gnorm": "0.503", "loss_scale": "0.5", "train_wall": "647", "gb_free": "34", "wall": "36958"}
+[2024-10-03 10:05:56,072][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 33 @ 7843 updates
+[2024-10-03 10:05:56,073][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 10:05:59,972][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 10:05:59,976][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 33 @ 7843 updates, score None) (writing took 3.9041425371542573 seconds)
+[2024-10-03 10:05:59,977][fairseq_cli.train][INFO] - end of epoch 33 (average epoch stats below)
+[2024-10-03 10:05:59,979][train][INFO] - {"epoch": 33, "train_loss": "0.959", "train_ntokens": "521949", "train_nsentences": "3531.31", "train_wps": "110516", "train_ups": "0.21", "train_wpb": "521949", "train_bsz": "3531.3", "train_num_updates": "7843", "train_lr": "0.0005", "train_gnorm": "0.497", "train_loss_scale": "0.5", "train_train_wall": "730", "train_gb_free": "34.2", "train_wall": "37058"}
+[2024-10-03 10:06:00,052][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 10:06:00,108][fairseq.trainer][INFO] - begin training epoch 34
+[2024-10-03 10:06:00,108][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 10:21:12,704][train_inner][INFO] - {"epoch": 34, "update": 33.66, "loss": "0.954", "ntokens": "521827", "nsentences": "3494.98", "wps": "103206", "ups": "0.2", "wpb": "521827", "bsz": "3495", "num_updates": "8000", "lr": "0.0005", "gnorm": "0.501", "loss_scale": "0.5", "train_wall": "681", "gb_free": "33.3", "wall": "37970"}
+[2024-10-03 10:24:40,147][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 34 @ 8081 updates
+[2024-10-03 10:24:40,156][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 10:24:43,881][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 10:24:43,927][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 34 @ 8081 updates, score None) (writing took 3.7805422842502594 seconds)
+[2024-10-03 10:24:43,928][fairseq_cli.train][INFO] - end of epoch 34 (average epoch stats below)
+[2024-10-03 10:24:43,931][train][INFO] - {"epoch": 34, "train_loss": "0.955", "train_ntokens": "521849", "train_nsentences": "3529.53", "train_wps": "110503", "train_ups": "0.21", "train_wpb": "521849", "train_bsz": "3529.5", "train_num_updates": "8081", "train_lr": "0.0005", "train_gnorm": "0.513", "train_loss_scale": "0.5", "train_train_wall": "792", "train_gb_free": "34.2", "train_wall": "38182"}
+[2024-10-03 10:24:44,047][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 10:24:44,071][fairseq.trainer][INFO] - begin training epoch 35
+[2024-10-03 10:24:44,072][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 10:35:59,474][train_inner][INFO] - {"epoch": 35, "update": 34.5, "loss": "0.953", "ntokens": "521687", "nsentences": "3493.91", "wps": "117661", "ups": "0.23", "wpb": "521687", "bsz": "3493.9", "num_updates": "8200", "lr": "0.0005", "gnorm": "0.476", "loss_scale": "0.5", "train_wall": "565", "gb_free": "33.3", "wall": "38857"}
+[2024-10-03 10:41:00,603][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 35 @ 8319 updates
+[2024-10-03 10:41:00,610][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 10:41:10,657][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 10:41:10,883][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 35 @ 8319 updates, score None) (writing took 10.27941389195621 seconds)
+[2024-10-03 10:41:10,884][fairseq_cli.train][INFO] - end of epoch 35 (average epoch stats below)
+[2024-10-03 10:41:10,902][train][INFO] - {"epoch": 35, "train_loss": "0.951", "train_ntokens": "521845", "train_nsentences": "3529.53", "train_wps": "125841", "train_ups": "0.24", "train_wpb": "521845", "train_bsz": "3529.5", "train_num_updates": "8319", "train_lr": "0.0005", "train_gnorm": "0.452", "train_loss_scale": "0.5", "train_train_wall": "656", "train_gb_free": "33.3", "train_wall": "39168"}
+[2024-10-03 10:41:11,028][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 10:41:11,043][fairseq.trainer][INFO] - begin training epoch 36
+[2024-10-03 10:41:11,043][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 10:50:50,971][train_inner][INFO] - {"epoch": 36, "update": 35.34, "loss": "0.951", "ntokens": "520497", "nsentences": "3569.07", "wps": "116770", "ups": "0.22", "wpb": "520497", "bsz": "3569.1", "num_updates": "8400", "lr": "0.0005", "gnorm": "0.509", "loss_scale": "0.5", "train_wall": "532", "gb_free": "33.3", "wall": "39749"}
+[2024-10-03 10:57:56,728][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 36 @ 8557 updates
+[2024-10-03 10:57:56,729][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 10:58:00,365][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 10:58:00,370][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 36 @ 8557 updates, score None) (writing took 3.641676307655871 seconds)
+[2024-10-03 10:58:00,370][fairseq_cli.train][INFO] - end of epoch 36 (average epoch stats below)
+[2024-10-03 10:58:00,374][train][INFO] - {"epoch": 36, "train_loss": "0.948", "train_ntokens": "521663", "train_nsentences": "3529.53", "train_wps": "122991", "train_ups": "0.24", "train_wpb": "521663", "train_bsz": "3529.5", "train_num_updates": "8557", "train_lr": "0.0005", "train_gnorm": "0.5", "train_loss_scale": "0.5", "train_train_wall": "656", "train_gb_free": "34.2", "train_wall": "40178"}
+[2024-10-03 10:58:00,438][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 10:58:00,443][fairseq.trainer][INFO] - begin training epoch 37
+[2024-10-03 10:58:00,443][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 11:06:24,492][train_inner][INFO] - {"epoch": 37, "update": 36.181, "loss": "0.948", "ntokens": "521507", "nsentences": "3551.3", "wps": "111730", "ups": "0.21", "wpb": "521507", "bsz": "3551.3", "num_updates": "8600", "lr": "0.0005", "gnorm": "0.473", "loss_scale": "0.5", "train_wall": "476", "gb_free": "33.3", "wall": "40682"}
+[2024-10-03 11:14:54,731][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 37 @ 8795 updates
+[2024-10-03 11:14:54,733][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 11:15:00,949][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 11:15:00,965][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 37 @ 8795 updates, score None) (writing took 6.233742106705904 seconds)
+[2024-10-03 11:15:00,975][fairseq_cli.train][INFO] - end of epoch 37 (average epoch stats below)
+[2024-10-03 11:15:00,980][train][INFO] - {"epoch": 37, "train_loss": "0.945", "train_ntokens": "521763", "train_nsentences": "3529.53", "train_wps": "121673", "train_ups": "0.23", "train_wpb": "521763", "train_bsz": "3529.5", "train_num_updates": "8795", "train_lr": "0.0005", "train_gnorm": "0.466", "train_loss_scale": "0.5", "train_train_wall": "266", "train_gb_free": "35.2", "train_wall": "41199"}
+[2024-10-03 11:15:01,127][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 11:15:01,134][fairseq.trainer][INFO] - begin training epoch 38
+[2024-10-03 11:15:01,134][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 11:21:31,234][train_inner][INFO] - {"epoch": 38, "update": 37.021, "loss": "0.945", "ntokens": "521390", "nsentences": "3506.88", "wps": "115003", "ups": "0.22", "wpb": "521390", "bsz": "3506.9", "num_updates": "8800", "lr": "0.0005", "gnorm": "0.473", "loss_scale": "0.5", "train_wall": "268", "gb_free": "35.2", "wall": "41589"}
+[2024-10-03 11:30:21,193][train_inner][INFO] - {"epoch": 38, "update": 37.861, "loss": "0.941", "ntokens": "524418", "nsentences": "3515.79", "wps": "197913", "ups": "0.38", "wpb": "524418", "bsz": "3515.8", "num_updates": "9000", "lr": "0.0005", "gnorm": "0.448", "loss_scale": "0.5", "train_wall": "437", "gb_free": "34.2", "wall": "42119"}
+[2024-10-03 11:31:30,119][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 38 @ 9033 updates
+[2024-10-03 11:31:30,121][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 11:31:36,375][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 11:31:36,380][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 38 @ 9033 updates, score None) (writing took 6.260888620279729 seconds)
+[2024-10-03 11:31:36,381][fairseq_cli.train][INFO] - end of epoch 38 (average epoch stats below)
+[2024-10-03 11:31:36,383][train][INFO] - {"epoch": 38, "train_loss": "0.942", "train_ntokens": "521755", "train_nsentences": "3529.53", "train_wps": "124752", "train_ups": "0.24", "train_wpb": "521755", "train_bsz": "3529.5", "train_num_updates": "9033", "train_lr": "0.0005", "train_gnorm": "0.454", "train_loss_scale": "0.5", "train_train_wall": "561", "train_gb_free": "35.2", "train_wall": "42194"}
+[2024-10-03 11:31:36,440][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 11:31:36,485][fairseq.trainer][INFO] - begin training epoch 39
+[2024-10-03 11:31:36,485][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 11:45:23,839][train_inner][INFO] - {"epoch": 39, "update": 38.702, "loss": "0.939", "ntokens": "521710", "nsentences": "3453.51", "wps": "115597", "ups": "0.22", "wpb": "521710", "bsz": "3453.5", "num_updates": "9200", "lr": "0.0005", "gnorm": "0.474", "loss_scale": "0.5", "train_wall": "573", "gb_free": "33.3", "wall": "43021"}
+[2024-10-03 11:48:48,272][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 39 @ 9271 updates
+[2024-10-03 11:48:48,274][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 11:48:51,319][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 11:48:51,325][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 39 @ 9271 updates, score None) (writing took 3.052683456800878 seconds)
+[2024-10-03 11:48:51,326][fairseq_cli.train][INFO] - end of epoch 39 (average epoch stats below)
+[2024-10-03 11:48:51,329][train][INFO] - {"epoch": 39, "train_loss": "0.939", "train_ntokens": "521976", "train_nsentences": "3529.53", "train_wps": "120036", "train_ups": "0.23", "train_wpb": "521976", "train_bsz": "3529.5", "train_num_updates": "9271", "train_lr": "0.0005", "train_gnorm": "0.449", "train_loss_scale": "0.5", "train_train_wall": "709", "train_gb_free": "33.3", "train_wall": "43229"}
+[2024-10-03 11:48:51,397][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 11:48:51,403][fairseq.trainer][INFO] - begin training epoch 40
+[2024-10-03 11:48:51,403][fairseq_cli.train][INFO] - Start iterating over samples
+[2024-10-03 12:01:19,964][train_inner][INFO] - {"epoch": 40, "update": 39.542, "loss": "0.939", "ntokens": "520304", "nsentences": "3639.2", "wps": "108837", "ups": "0.21", "wpb": "520304", "bsz": "3639.2", "num_updates": "9400", "lr": "0.0005", "gnorm": "0.43", "loss_scale": "0.5", "train_wall": "600", "gb_free": "35.2", "wall": "43978"}
+[2024-10-03 12:06:08,510][fairseq.checkpoint_utils][INFO] - Preparing to save checkpoint for epoch 40 @ 9509 updates
+[2024-10-03 12:06:08,511][fairseq.trainer][INFO] - Saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 12:06:13,924][fairseq.trainer][INFO] - Finished saving checkpoint to /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt
+[2024-10-03 12:06:13,930][fairseq.checkpoint_utils][INFO] - Saved checkpoint /share/data/pals/shester/sign_dinosr_logs/outputs/masking_random_80/ckpt/checkpoint_last.pt (epoch 40 @ 9509 updates, score None) (writing took 5.420406221412122 seconds)
+[2024-10-03 12:06:13,930][fairseq_cli.train][INFO] - end of epoch 40 (average epoch stats below)
+[2024-10-03 12:06:13,946][train][INFO] - {"epoch": 40, "train_loss": "0.936", "train_ntokens": "521806", "train_nsentences": "3529.53", "train_wps": "119115", "train_ups": "0.23", "train_wpb": "521806", "train_bsz": "3529.5", "train_num_updates": "9509", "train_lr": "0.0005", "train_gnorm": "0.442", "train_loss_scale": "0.5", "train_train_wall": "681", "train_gb_free": "33.3", "train_wall": "44272"}
+[2024-10-03 12:06:14,014][fairseq.data.iterators][INFO] - grouped total_num_itrs = 238
+[2024-10-03 12:06:14,033][fairseq.trainer][INFO] - begin training epoch 41
+[2024-10-03 12:06:14,033][fairseq_cli.train][INFO] - Start iterating over samples

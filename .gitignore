@@ -1,0 +1,13 @@
+*__pycache__*
+*.pt*
+results/
+
+# Build artifacts produced by `pip install -e .` in models/fairseq.
+build/
+*.egg-info/
+*.so
+models/fairseq/fairseq/version.py
+
+# Cython sources generated from the .pyx files at build time
+models/fairseq/fairseq/data/data_utils_fast.cpp
+models/fairseq/fairseq/data/token_block_utils_fast.cpp
