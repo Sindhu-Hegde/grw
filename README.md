@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <b>ECCV 2026</b>
+  <img src="https://img.shields.io/badge/ECCV-2026-6f42c1?style=for-the-badge&labelColor=1a1a2e" alt="ECCV 2026">
 </p>
 
 <p align="center">
@@ -19,7 +19,11 @@
 <p align="center">
   <a href="https://arxiv.org/abs/2605.31589"><img src="https://img.shields.io/badge/arXiv-2605.31589-b31b1b.svg" alt="arXiv"></a>
   <a href="https://www.robots.ox.ac.uk/~vgg/research/grw/"><img src="https://img.shields.io/badge/Project-Page-blue.svg" alt="Project Page"></a>
-  <a href="https://www.robots.ox.ac.uk/~vgg/research/grw/dataset"><img src="https://img.shields.io/badge/Dataset-GRW-green.svg" alt="GRW Dataset"></a>
+  <a href="https://www.robots.ox.ac.uk/~vgg/research/grw/dataset"><img src="https://img.shields.io/badge/Dataset-Visualization-green.svg" alt="GRW Dataset Visualization"></a>
+  <a href="https://huggingface.co/datasets/sindhuhegde/grw"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-GRW-FFD21E.svg" alt="GRW Dataset on Hugging Face"></a>
+</p>
+
+<p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-yellow.svg" alt="License: Apache 2.0"></a>
   <img src="https://img.shields.io/badge/python-3.10-blue.svg" alt="Python 3.10">
 </p>
@@ -75,12 +79,12 @@ The csv files inside `files/` are the train and test datasets for the two tasks.
 import pandas as pd
 
 # Semantic gesture classification
-df_semantic_train = pd.read_csv("files/train_semantic_classification.csv")	# Semantic Gesture Classification train set
-df_semantic_test = pd.read_csv("files/test_semantic_classification.csv")	# Semantic Gesture Classification test set
+df_semantic_train = pd.read_csv("files/semantic_classification_train.csv")	# Semantic Gesture Classification train set
+df_semantic_test = pd.read_csv("files/semantic_classification_test.csv")	# Semantic Gesture Classification test set
 
 # Gesture word recognition and localization
-df_recog_localize_train = pd.read_csv("files/train_recognition_localization.csv")	# Word Recognition and Localization train set
-df_recog_localize_test = pd.read_csv("files/test_recognition_localization.csv")	# Word Recognition and Localization test set
+df_recog_localize_train = pd.read_csv("files/recognition_localization_train.csv")	# Word Recognition and Localization train set
+df_recog_localize_test = pd.read_csv("files/recognition_localization_test.csv")	# Word Recognition and Localization test set
 ```
 
 To download and pre-process the videos to obtain gesture crops, run the following commands:
@@ -119,16 +123,16 @@ We provide pre-extracted SHuBERT features which are needed for training and eval
 
 | Feature set | Download Link |
 |:--:|:--:|
-| Semantic Classification - Train | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/semantic_classification_train.tar.gz) |
-| Semantic Classification - Test | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/semantic_classification_test.tar.gz) |
-| Semantic Classification - Test unseen words | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/semantic_classification_test_unseen_words.tar.gz) |
-| Word Recognition & Localization - Train | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/recognition_localization_train.tar.gz) |
-| Word Recognition & Localization - Test | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/recognition_localization_test.tar.gz) |
+| Semantic Classification - Train | [Link](https://thor.robots.ox.ac.uk/grw/shubert-features/semantic_classification_train.tar.gz) |
+| Semantic Classification - Test | [Link](https://thor.robots.ox.ac.uk/grw/shubert-features/semantic_classification_test.tar.gz) |
+| Semantic Classification - Test unseen words | [Link](https://thor.robots.ox.ac.uk/grw/shubert-features/semantic_classification_test_unseen_words.tar.gz) |
+| Word Recognition & Localization - Train | [Link](https://thor.robots.ox.ac.uk/grw/shubert-features/recognition_localization_train.tar.gz) |
+| Word Recognition & Localization - Test | [Link](https://thor.robots.ox.ac.uk/grw/shubert-features/recognition_localization_test.tar.gz) |
 
 <details>
 <summary><b>Verify downloads (checksums)</b></summary>
 
-Download the checksum file from [here](https://www.robots.ox.ac.uk/~vgg/research/grw/shubert_features/SHA512SUMS)
+Download the checksum file from [here](https://thor.robots.ox.ac.uk/grw/SHA512SUMS)
 After downloading all the files, they can be verified by the following:
 
 ```bash
@@ -185,23 +189,23 @@ mkdir checkpoints
 cd checkpoints
 
 #### Semantic Classification model
-wget https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/semantic_classification.pth
+wget https://thor.robots.ox.ac.uk/grw/checkpoints/semantic_classification.pth
 
 #### Word Recognition and Localization model
-wget https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/recognition_localization.pth
+wget https://thor.robots.ox.ac.uk/grw/checkpoints/recognition_localization.pth
 
 #### SHuBERT models (needed for preprocessing)
 # [1] YOLO
-wget https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/yolov8n.pt
+wget https://thor.robots.ox.ac.uk/grw/checkpoints/shubert/yolov8n.pt
 
 # [2] Dino fine-tuned for hands keypoint model
-wget https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/hand_dinov2.pth
+wget https://thor.robots.ox.ac.uk/grw/checkpoints/shubert/hand_dinov2.pth
 
 # [3] Hand keypoint model
-wget https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/hand_landmarker.task
+wget https://thor.robots.ox.ac.uk/grw/checkpoints/shubert/hand_landmarker.task
 
 # [4] SHuBERT model
-wget https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/shubert.pt
+wget https://thor.robots.ox.ac.uk/grw/checkpoints/shubert/shubert.pt
 
 cd ..
 ```
@@ -210,9 +214,9 @@ Alternatively, these checkpoints can also be downloaded directly from the links 
 
 | Model | Download Link |
 |:--:|:--:|
-| Semantic Classification model | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/semantic_classification.pth) |
-| Word Recognition and Localization model | [Link](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/recognition_localization.pth) |
-| SHuBERT | 1. [YOLO](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/yolov8n.pt)<br>2. [Dino fine-tuned for hands](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/hand_dinov2.pth)<br>3. [Hand keypoint model](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/hand_landmarker.task)<br>4. [SHuBERT](https://www.robots.ox.ac.uk/~vgg/research/grw/checkpoints/shubert/shubert.pt) |
+| Semantic Classification model | [Link](https://thor.robots.ox.ac.uk/grw/checkpoints/semantic_classification.pth) |
+| Word Recognition and Localization model | [Link](https://thor.robots.ox.ac.uk/grw/checkpoints/recognition_localization.pth) |
+| SHuBERT | 1. [YOLO](https://thor.robots.ox.ac.uk/grw/checkpoints/shubert/yolov8n.pt)<br>2. [Dino fine-tuned for hands](https://thor.robots.ox.ac.uk/grw/checkpoints/shubert/hand_dinov2.pth)<br>3. [Hand keypoint model](https://thor.robots.ox.ac.uk/grw/checkpoints/shubert/hand_landmarker.task)<br>4. [SHuBERT](https://thor.robots.ox.ac.uk/grw/checkpoints/shubert/shubert.pt) |
 
 ---
 
@@ -315,7 +319,7 @@ Use the links [above](#download-shubert-features) to download and unzip the SHuB
 
 ```bash
 python evaluate_semantic_classification.py \
-  --test_csv=files/test_semantic_classification.csv \
+  --test_csv=files/semantic_classification_test.csv \
   --checkpoint_path=checkpoints/semantic_classification.pth \
   --feature_dir=shubert_features/semantic_classification/test
 ```
@@ -336,7 +340,7 @@ The results obtained are displayed below:
 
 ```bash
 python evaluate_recognition_localization.py \
-  --test_csv=files/test_recognition_localization.csv \
+  --test_csv=files/recognition_localization_test.csv \
   --checkpoint_path=checkpoints/recognition_localization.pth \
   --feature_dir=shubert_features/recognition_localization/test
 ```
