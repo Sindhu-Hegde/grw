@@ -1,8 +1,3 @@
-"""
-Evaluates a binary gesture-presence (semantic) classifier: reports overall
-accuracy/precision/recall, plus accuracy restricted to the subset of
-predictions the model is highly confident about.
-"""
 import argparse
 import torch
 from torch.utils import data as data_utils
@@ -12,7 +7,6 @@ from models.grw_models import *
 from tqdm import tqdm
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score
-
 
 parser = argparse.ArgumentParser(description='Code to evaluate the classifier')
 parser.add_argument('--test_csv', type=str, required=True, help='Path of the test-data csv file')
@@ -189,12 +183,12 @@ if __name__ == "__main__":
 	checkpoint_path = args.checkpoint_path
 
 	# Dataloader
-	test_dataset = DataGenerator_Train_WordClassifier(df_test, args.feature_dir)
+	test_dataset = DataGenerator_Gestures(df_test, args.feature_dir)
 	test_data_loader = data_utils.DataLoader(
-		test_dataset, batch_size=batch_size, num_workers=4, collate_fn=lambda x: collate_data_wordclassifier(x))
+		test_dataset, batch_size=batch_size, num_workers=4, collate_fn=lambda x: collate_data(x))
 
 	# Load the model
-	model = Semantic_Classifier(input_dim=768, num_classes=1, use_layer_weights=True).cuda()
+	model = Semantic_Classifier(num_classes=1).cuda()
 	model = load_checkpoint(model, checkpoint_path)
 
 	# Evaluate and obtain the metrics

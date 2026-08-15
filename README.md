@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/ECCV-2026-6f42c1?style=for-the-badge&labelColor=1a1a2e" alt="ECCV 2026">
+  <a href="https://eccv.ecva.net/Conferences/2026"><img src="https://img.shields.io/badge/ECCV-2026-6f42c1?style=for-the-badge&labelColor=1a1a2e" alt="ECCV 2026"></a>
 </p>
 
 <p align="center">
@@ -38,6 +38,7 @@ Our aim is to recognise and localize **semantic gestures** in real-world videos.
 
 ## 🚀 News
 
+- **[2026.08.15]** 🏋️ **Training code** released - Both models: (i) semantic gesture classification, and (ii) word recognition and localization, can now be trained from scratch
 - **[2026.08.13]** 🔥 **Inference code** released - It is now possible to obtain results for the two tasks: (i) semantic gesture classification, and (ii) word recognition and localization, for any real-world video
 - **[2026.08.08]** 🧬 **Pre-trained** checkpoints released
 - **[2026.08.06]** 📋 Paper released on [arXiv](https://arxiv.org/abs/2605.31589)
@@ -363,7 +364,66 @@ The predictions from the recognition and localization model are saved in: `preds
 
 ## 🏋️ Training
 
-Training details coming soon, stay tuned!
+For training, pre-extracted SHuBERT features are required. So make sure the train features have either been downloaded and untarred as described [above](#download-shubert-features) or have been extracted from the gesture videos.
+
+Only the train csv is needed: a small validation set is held out from it automatically (500 clips by default, controlled by `--val_size`), so no separate validation csv is required. The split is stratified, seeded by `--seed`, and disjoint from the data the model is trained on. Checkpoints are written to `--checkpoint_dir` after every epoch, and training can be resumed from any of them with `--checkpoint_path`.
+
+### Task-1: Semantic gesture classification
+
+Trains the binary classifier that decides whether the gesture co-occurring with a target word is semantic.
+
+```bash
+python train_semantic_classifier.py \
+  --train_csv=<path-to-train-csv> \
+  --checkpoint_dir=<path-to-save-checkpoints> \
+  --feature_dir=<path-to-shubert-features>
+```
+
+Example run:
+
+```bash
+python train_semantic_classifier.py \
+  --train_csv=files/semantic_classification_train.csv \
+  --checkpoint_dir=checkpoints/semantic_classification \
+  --feature_dir=shubert_features/semantic_classification/train
+```
+
+The two classes are heavily imbalanced, so the sampler and the loss are both class-weighted automatically from the train split. Each epoch prints the running loss and accuracy, followed by the loss and accuracy on the held-out validation set.
+
+### Task-2: Word recognition and localization
+
+Trains the joint model that recognizes which of the 155 gesture words is being performed and localizes its temporal boundary.
+
+```bash
+python train_recognition_localization.py \
+  --train_csv=<path-to-train-csv> \
+  --checkpoint_dir=<path-to-save-checkpoints> \
+  --feature_dir=<path-to-shubert-features>
+```
+
+Example run:
+
+```bash
+python train_recognition_localization.py \
+  --train_csv=files/recognition_localization_train.csv \
+  --checkpoint_dir=checkpoints/recognition_localization \
+  --feature_dir=shubert_features/recognition_localization/train
+```
+
+The recognition and localization heads are optimized jointly. Each epoch prints the two losses along with the word accuracy and the mIoU of the predicted boundary. Pass `--apply_augmentations` to enable temporal augmentation, which shifts the features in time and moves the ground-truth boundaries with them.
+
+### Useful flags
+
+| Flag | Default | Description |
+|:--|:--:|:--|
+| `--val_size` | 500 | Number of clips held out from the train csv for validation |
+| `--seed` | 42 | Random seed for the train/validation split |
+| `--num_epochs` | 20 | Number of epochs to train for |
+| `--batch_size` | 128 | Batch size |
+| `--num_workers` | 8 | Dataloader workers |
+| `--lr` | 1e-4 | Learning rate |
+| `--checkpoint_path` | `None` | Resume training from this checkpoint |
+| `--apply_augmentations` | off | Temporal augmentation (Task-2 only) |
 
 ---
 

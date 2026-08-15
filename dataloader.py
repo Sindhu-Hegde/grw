@@ -15,7 +15,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning) 
 warnings.filterwarnings("ignore", category=UserWarning) 
 
-class DataGenerator_Train_WordClassifier(data.Dataset):
+class DataGenerator_Gestures(data.Dataset):
 
 	def __init__(self, df, feature_dir, fps=25, apply_augmentations=False):
 
@@ -40,9 +40,9 @@ class DataGenerator_Train_WordClassifier(data.Dataset):
 
 		word = data.target_word
 		
-		visual_feats, visual_mask, temporal_shift = self.load_visual_feats_shubert(feat_fname)		
+		visual_feats, visual_mask, src_idx = self.load_visual_feats_shubert(feat_fname)
 		if visual_feats is None:
-			print("Visual feats is None: ", feat_fname)
+			# print("Visual feats is None: ", feat_fname)
 			return None
 
 		visual_feats = torch.FloatTensor(np.array(visual_feats))
@@ -56,7 +56,7 @@ class DataGenerator_Train_WordClassifier(data.Dataset):
 			'word': word,
 			'file': file,
 			'info': data,
-			'temporal_shift': temporal_shift,
+			'src_idx': src_idx,
 		}
 
 		return out_dict
@@ -68,19 +68,21 @@ class DataGenerator_Train_WordClassifier(data.Dataset):
 			visual_feats = np.transpose(visual_feats, (1, 0, 2))  # (T, 12, 768)
 			# print("Visual features: ", visual_feats.shape)
 
-			temporal_shift = 0
+			# Identity mapping when no augmentation is applied, so callers can map frame
+			# annotations through src_idx unconditionally
+			src_idx = torch.arange(len(visual_feats))
 			if self.apply_augmentations:
 				aug = TemporalAug(use_interpolate_for_speed=False)
-				visual_feats, temporal_shift = aug.apply_random_temporal_augs(visual_feats)
+				visual_feats, src_idx = aug.apply_random_temporal_augs(visual_feats)
 
 			visual_mask = torch.ones((len(visual_feats)))
 
 		except:
 			# print("Error in loading Shubert feats: ", fname)
-			return None, None, 0
-		
-		
-		return visual_feats, visual_mask, temporal_shift
+			return None, None, None
+
+
+		return visual_feats, visual_mask, src_idx
 
 
 class TemporalAug:
@@ -120,15 +122,17 @@ class TemporalAug:
         """
         Fast index-based resample (nearest neighbor in time).
         This avoids F.interpolate allocations.
+        Returns (resampled_feat, idx), where idx[t] is the input frame taken at output
+        position t. idx is non-decreasing, so frames stay in temporal order.
         """
         feat = self._ensure_tensor(feat)
         T = feat.shape[0]
         if T <= 1:
-            return feat
+            return feat, torch.arange(T)
 
         target_T = max(min_frames, int(round(T / float(speed_factor))))
         if target_T == T:
-            return feat
+            return feat, torch.arange(T)
 
         # nearest neighbor index mapping
         # create float positions in source space that map to indices
@@ -136,32 +140,43 @@ class TemporalAug:
         pos = torch.linspace(0, T - 1, steps=target_T, device=feat.device)
         idx = pos.round().long().clamp(0, T - 1)  # nearest neighbor
         # index along dim 0 (time)
-        return feat[idx]
+        return feat[idx], idx.cpu()
 
     def speed_resample_interp(self, feat, speed_factor, min_frames=1):
         # slower but smoother
+        # Returns (resampled_feat, idx). Each output frame blends its neighbours, so idx
+        # records the nearest source frame -- an approximation used only for bookkeeping.
         feat = self._ensure_tensor(feat)
         T = feat.shape[0]
         if T <= 1:
-            return feat
+            return feat, torch.arange(T)
         target_T = max(min_frames, int(round(T / float(speed_factor))))
         if target_T == T:
-            return feat
+            return feat, torch.arange(T)
 
         flat, rest_shape = self._to_flat_NCL_no_copy(feat)
         flat = flat.contiguous().to(torch.float32)  # ensure contiguous
         flat_res = F.interpolate(flat, size=target_T, mode="linear", align_corners=False)
         out = self._from_flat_NCL_no_copy(flat_res, rest_shape)
-        return out.to(dtype=feat.dtype)
+
+        pos = torch.linspace(0, T - 1, steps=target_T)
+        idx = pos.round().long().clamp(0, T - 1)
+
+        return out.to(dtype=feat.dtype), idx
 
     def drop_random_frames(self, feat, max_drop_frac=0.2, min_frames=1):
+        """
+        Drop a random subset of frames. The kept indices are sorted before indexing, so
+        the surviving frames stay in their original temporal order.
+        Returns (kept_feat, keep_idx) with keep_idx the surviving input positions.
+        """
         feat = self._ensure_tensor(feat)
         T = feat.shape[0]
         if T <= min_frames:
-            return feat
+            return feat, torch.arange(T)
         max_drop = int(math.floor(T * max_drop_frac))
         if max_drop < 1:
-            return feat
+            return feat, torch.arange(T)
         # sample keep_count indices (faster than randperm if keep_count ~ T)
         drop_count = random.randint(1, max_drop)
         keep_count = max(min_frames, T - drop_count)
@@ -170,36 +185,51 @@ class TemporalAug:
         probs = torch.ones(T, device=feat.device)
         idx = torch.multinomial(probs, num_samples=keep_count, replacement=False)
         idx, _ = torch.sort(idx)
-        return feat[idx]
+        return feat[idx], idx.cpu()
 
-    def shift_with_zerofill(self, feat, shift):
+    def shift_with_zerofill(self, feat, shift, src_idx=None):
+        """
+        Translate the sequence in time, zero-filling the frames that scroll into view.
+        Returns (shifted_feat, shifted_src_idx), where the zero-filled positions carry
+        -1 so they can be told apart from real frames.
+        """
         feat = self._ensure_tensor(feat)
-        if shift == 0 or feat.shape[0] <= 1:
-            return feat
         T = feat.shape[0]
+        if src_idx is None:
+            src_idx = torch.arange(T)
+
+        if shift == 0 or T <= 1:
+            return feat, src_idx
+
         # preallocate output to avoid roll copies
         out = torch.zeros_like(feat)
+        out_src = torch.full((T,), -1, dtype=torch.long)
         if shift > 0:
             # shift right: new[t] = old[t-shift] for t=shift..T-1
             out[shift:] = feat[:T - shift]
+            out_src[shift:] = src_idx[:T - shift]
         else:
             # shift < 0: shift left
             k = -shift
             out[:T - k] = feat[k:]
-        return out
+            out_src[:T - k] = src_idx[k:]
+        return out, out_src
 
     def apply_random_temporal_augs(self, feat,
                                    p_drop=0.3, max_drop_frac=0.3,
                                    p_shift=0.3, max_shift=8,
                                    p_speed=0.3, min_speed=0.75, max_speed=1.25,
                                    min_frames=4, allow_none=True, random_state=None):
-        """Returns (augmented_feat, temporal_shift) where temporal_shift is the
-        frame shift applied (positive = shifted right, 0 if no shift)."""
+        """Returns (augmented_feat, src_idx), where src_idx[t] is the index of the input
+        frame sitting at output position t, and -1 marks a zero-filled frame. Ground-truth
+        frame annotations are mapped through src_idx, so they stay aligned whichever
+        combination of augmentations fired. src_idx is non-decreasing over the real
+        frames: none of the ops reorders the sequence."""
         if random_state is not None:
             random.seed(random_state)
 
         feat = self._ensure_tensor(feat)
-        temporal_shift = 0
+        src_idx = torch.arange(feat.shape[0])
 
         include_drop = bool(random.random() < float(p_drop))
         include_shift = bool(random.random() < float(p_shift))
@@ -211,38 +241,38 @@ class TemporalAug:
             include_shift = (choice == "shift")
             include_speed = (choice == "speed")
 
-        ops = []
+        # Applied in a fixed order (drop -> speed -> shift) rather than a shuffled one, so
+        # that composing the index mappings is unambiguous. Each op maps the running
+        # src_idx exactly the way it maps the features.
+        cur = feat
+
         if include_drop:
-            ops.append(("drop", partial(self.drop_random_frames, max_drop_frac=max_drop_frac, min_frames=min_frames)))
-        if include_shift:
-            shift_amt = random.randint(-max_shift, max_shift)
-            temporal_shift = shift_amt
-            ops.append(("shift", partial(self.shift_with_zerofill, shift=shift_amt)))
+            cur, keep_idx = self.drop_random_frames(cur, max_drop_frac=max_drop_frac, min_frames=min_frames)
+            src_idx = src_idx[keep_idx]
+
         if include_speed:
             speed_factor = random.uniform(min_speed, max_speed)
             if self.use_interpolate_for_speed:
-                ops.append(("speed", partial(self.speed_resample_interp, speed_factor=speed_factor, min_frames=min_frames)))
+                cur, resample_idx = self.speed_resample_interp(cur, speed_factor=speed_factor, min_frames=min_frames)
             else:
-                ops.append(("speed", partial(self.speed_resample_fast, speed_factor=speed_factor, min_frames=min_frames)))
+                cur, resample_idx = self.speed_resample_fast(cur, speed_factor=speed_factor, min_frames=min_frames)
+            src_idx = src_idx[resample_idx]
 
-        if len(ops) == 0:
-            return feat, temporal_shift
+        if include_shift:
+            shift_amt = random.randint(-max_shift, max_shift)
+            cur, src_idx = self.shift_with_zerofill(cur, shift_amt, src_idx=src_idx)
 
-        random.shuffle(ops)
-        cur = feat
-        for name, fn in ops:
-            cur = fn(cur)
-        return cur, temporal_shift
+        return cur, src_idx
 
 
-def collate_data_wordclassifier(data):
+def collate_data(data):
 
 	visual_feats = []
 	visual_mask = []
 	words = []
 	files = []	
 	info = []
-	temporal_shifts = []
+	src_idxs = []
 
 	for sample in data:
 
@@ -254,15 +284,15 @@ def collate_data_wordclassifier(data):
 		word = sample['word']
 		file = sample['file']
 		inf = sample['info']
-		ts = sample.get('temporal_shift', 0)
-		
-			
+		si = sample.get('src_idx', None)
+
+
 		visual_feats.append(feats)
 		visual_mask.append(feat_mask)
 		words.append(word)
 		files.append(file)
 		info.append(inf)
-		temporal_shifts.append(ts)
+		src_idxs.append(si)
 		
 		
 	if len(visual_feats) > 0:
@@ -278,7 +308,7 @@ def collate_data_wordclassifier(data):
 			'word': words,
 			'file': files,
 			'info': info,
-			'temporal_shift': temporal_shifts,
+			'src_idx': src_idxs,
 		}
 
 	return out_dict		

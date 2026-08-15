@@ -1,6 +1,7 @@
 *__pycache__*
 *.pt*
 results/
+preds.csv
 
 # Build artifacts produced by `pip install -e .` in models/fairseq.
 build/

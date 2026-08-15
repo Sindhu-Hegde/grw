@@ -67,7 +67,7 @@ label_to_word_dict = {v: k for k, v in word_label_dict.items()}
 
 def read_data(path):
 
-	df = pd.read_csv(path, dtype={'unique_fname_test': str})
+	df = pd.read_csv(path)
 	print("Total files: ", len(df))
 
 	return df
@@ -293,11 +293,11 @@ if __name__ == "__main__":
 	batch_size = args.batch_size
 	checkpoint_path = args.checkpoint_path
 
-	test_dataset = DataGenerator_Train_WordClassifier(df_test, args.feature_dir)
+	test_dataset = DataGenerator_Gestures(df_test, args.feature_dir)
 	test_data_loader = data_utils.DataLoader(
-		test_dataset, batch_size=batch_size, num_workers=4, collate_fn=lambda x: collate_data_wordclassifier(x))
+		test_dataset, batch_size=batch_size, num_workers=4, collate_fn=lambda x: collate_data(x))
 
-	model = Word_Recognition_Localization(num_classes=len(all_words), use_layer_weights=True).cuda()
+	model = Word_Recognition_Localization(num_classes=len(all_words)).cuda()
 	model.cuda()
 	model = load_checkpoint(model, checkpoint_path)
 
